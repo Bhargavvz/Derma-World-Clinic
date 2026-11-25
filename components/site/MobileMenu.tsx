@@ -14,7 +14,7 @@ export function MobileMenu({ items, hours }: { items: { href: string; label: str
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger
-        className="btn-secondary !px-3 lg:hidden"
+        className="btn-secondary !px-3 xl:hidden"
         aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
         aria-controls="mobile-menu"
         aria-expanded={open}

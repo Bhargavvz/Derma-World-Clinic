@@ -8,7 +8,7 @@ import { track } from "@/lib/analytics";
 import { cn } from "./primitives";
 
 /** Plain <a hreflang> links to the current page in each language; the choice is remembered in a cookie. */
-export function LanguageSwitcher({ inverted = false }: { inverted?: boolean }) {
+export function LanguageSwitcher({ inverted = false, compact = false }: { inverted?: boolean; compact?: boolean }) {
   const current = useLocale() as Locale;
   const pathname = usePathname(); // without locale prefix
   const t = useTranslations("common");
@@ -26,10 +26,11 @@ export function LanguageSwitcher({ inverted = false }: { inverted?: boolean }) {
             if (l !== current) track("language_change", { language: l });
           }}
           className={cn(
-            "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-soft)] px-2 font-semibold",
+            "inline-flex items-center justify-center rounded-[var(--radius-soft)] px-2 font-semibold",
+            compact ? "min-h-7 min-w-9 text-[0.8125rem]" : "min-h-11 min-w-11",
             l === current
               ? inverted
-                ? "bg-white text-brand-800"
+                ? "bg-white/15 text-white"
                 : "bg-white text-brand-900 ring-1 ring-sage-200"
               : inverted
                 ? "text-brand-100 hover:text-white"

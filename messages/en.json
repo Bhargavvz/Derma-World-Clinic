@@ -56,7 +56,10 @@
     "visitUs": "Visit us",
     "privacy": "Privacy Policy",
     "cookieSettings": "Cookie settings",
-    "copyright": "© {year} Derma World Skin & Hair Clinic. All rights reserved. Information on this website is general and is not a substitute for a medical consultation. Treatment suitability and results vary between individuals."
+    "copyright": "© {year} Derma World Skin & Hair Clinic. All rights reserved. Information on this website is general and is not a substitute for a medical consultation. Treatment suitability and results vary between individuals.",
+    "hours": "Opening hours",
+    "reach": "Talk to the clinic",
+    "reachText": "Call, message on WhatsApp, or find your way here."
   },
   "cta": {
     "title": "Book a consultation for your skin or hair concern",
