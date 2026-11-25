@@ -28,7 +28,7 @@ export function SettingsForm({ initial }: { initial: NotificationSettings }) {
           Email the patient when a request is set to <strong>confirmed</strong> or <strong>cancelled</strong> (only if they gave an email and email is configured).
         </span>
       </label>
-      <fieldset className="space-y-3 rounded-2xl border border-sage-200 p-4">
+      <fieldset className="space-y-3 rounded-[var(--radius-soft)] border border-sage-200 p-4">
         <legend className="px-1 font-semibold">Data retention</legend>
         <label className="flex items-start gap-3">
           <input type="checkbox" className="mt-1 h-5 w-5 accent-brand-700" checked={v.retentionEnabled} onChange={(e) => setV({ ...v, retentionEnabled: e.target.checked })} />

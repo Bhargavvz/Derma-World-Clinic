@@ -24,7 +24,7 @@ export async function TopBar() {
   const t = await getTranslations();
   const primary = c.phones[0]!;
   return (
-    <div className="hidden bg-brand-950 text-[0.8125rem] text-brand-100 lg:block">
+    <div className="hidden bg-brand-800 text-[0.8125rem] text-brand-100 lg:block">
       <div className="container-page flex items-center justify-between gap-6 py-2.5 whitespace-nowrap">
         {c.mapsPlaceUrl ? (
           <TrackedLink event="map_open" href={c.mapsPlaceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white">
@@ -73,9 +73,9 @@ export async function Header() {
             event="phone_click"
             href={`tel:${primary.tel}`}
             aria-label={t("common.callClinicOn", { phone: primary.display })}
-            className="hidden min-h-11 items-center gap-2 px-3 text-[0.9375rem] font-semibold text-brand-900 hover:text-lagoon-700 sm:inline-flex"
+            className="hidden min-h-11 items-center gap-2 px-3 text-[0.9375rem] font-semibold text-brand-900 hover:text-rose-700 sm:inline-flex"
           >
-            <Phone className="h-4 w-4 text-lagoon-600" aria-hidden="true" />
+            <Phone className="h-4 w-4 text-rose-600" aria-hidden="true" />
             <span className="hidden 2xl:inline">{primary.display}</span>
           </TrackedLink>
           <Link href="/appointment" className="btn-primary hidden sm:inline-flex">

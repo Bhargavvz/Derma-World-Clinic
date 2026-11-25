@@ -98,7 +98,7 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl font-semibold">Appointments</h1>
+        <div><h1 className="text-[2.25rem] leading-tight font-semibold">Appointments</h1><p className="mt-1 text-sage-600">Requests from the website. Confirm each one with the patient, then update its status.</p></div>
         <div className="no-print flex flex-wrap gap-2">
           <button type="button" className="btn-secondary" onClick={refresh} disabled={pending}>
             <RefreshCw className={`h-4 w-4 ${pending ? "animate-spin" : ""}`} aria-hidden="true" /> Refresh
@@ -113,7 +113,7 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
       </div>
 
       {error && (
-        <p role="alert" className="rounded-2xl bg-red-50 p-3 text-red-700">
+        <p role="alert" className="rounded-[var(--radius-soft)] bg-red-50 p-3 text-red-700">
           {error}{" "}
           <button type="button" className="underline" onClick={refresh}>
             Retry
@@ -121,7 +121,7 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
         </p>
       )}
 
-      <ul className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-8">
+      <ul className="grid grid-cols-2 divide-sage-200 overflow-hidden rounded-[var(--radius-frame)] border border-sage-200 bg-white sm:grid-cols-4 lg:grid-cols-8 lg:divide-x">
         {(
           [
             ["Total", stats.total],
@@ -134,14 +134,14 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
             ["Upcoming 7 days", stats.upcoming7],
           ] as [string, number][]
         ).map(([l, n]) => (
-          <li key={l} className="rounded-2xl bg-white p-3 shadow-sm">
-            <p className="text-xs text-gray-600">{l}</p>
-            <p className="text-2xl font-bold text-brand-800">{n}</p>
+          <li key={l} className="px-4 py-3">
+            <p className="font-display text-[1.75rem] leading-none font-semibold text-brand-800">{n}</p>
+            <p className="mt-1.5 text-xs text-sage-600">{l}</p>
           </li>
         ))}
       </ul>
 
-      <div className="no-print grid gap-3 rounded-2xl bg-white p-4 shadow-sm md:grid-cols-4">
+      <div className="no-print grid gap-4 rounded-[var(--radius-frame)] border border-sage-200 bg-white p-5 md:grid-cols-4">
         <div>
           <label htmlFor="q" className="label">
             Search
@@ -176,22 +176,22 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
       </div>
 
       {items.length === 0 && !error ? (
-        <p className="rounded-2xl bg-white p-6 text-center text-gray-600">No appointment requests yet.</p>
+        <p className="rounded-[var(--radius-soft)] bg-white p-6 text-center text-sage-600">No appointment requests yet.</p>
       ) : (
-        <div className="overflow-x-auto rounded-2xl bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-[var(--radius-frame)] border border-sage-200 bg-white">
           <table className="w-full text-left text-sm">
             <caption className="sr-only">Appointment requests</caption>
-            <thead className="bg-sage-100 text-gray-900">
+            <thead className="border-b border-sage-200 bg-sage-50 text-[0.8125rem] text-sage-600">
               <tr>
                 <th className="p-3">
                   <SortBtn k="name" label="Name" />
                 </th>
-                <th className="p-3">Contact</th>
-                <th className="p-3">Treatment</th>
+                <th className="p-3 font-semibold">Contact</th>
+                <th className="p-3 font-semibold">Treatment</th>
                 <th className="p-3">
                   <SortBtn k="preferredDate" label="Preferred" />
                 </th>
-                <th className="p-3">Notes</th>
+                <th className="p-3 font-semibold">Notes</th>
                 <th className="p-3">
                   <SortBtn k="createdAt" label="Submitted" />
                 </th>
@@ -202,31 +202,31 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
             </thead>
             <tbody className="divide-y divide-sage-100">
               {view.map((a) => (
-                <tr key={a.id} className="align-top">
+                <tr key={a.id} className="align-top transition-colors hover:bg-sage-50/60">
                   <td className="p-3">
-                    <button type="button" className="font-semibold text-brand-700 underline" onClick={() => setSelected(a.id)}>
+                    <button type="button" className="text-left font-semibold text-brand-800 underline-offset-4 hover:text-rose-700 hover:underline" onClick={() => setSelected(a.id)}>
                       {a.name}
                     </button>
                   </td>
                   <td className="p-3">
-                    <a href={`tel:${a.phone.replace(/[^\d+]/g, "")}`} className="block text-brand-700">
+                    <a href={`tel:${a.phone.replace(/[^\d+]/g, "")}`} className="block whitespace-nowrap text-ink hover:text-rose-700">
                       {a.phone}
                     </a>
-                    {a.email && <span className="block break-all text-gray-600">{a.email}</span>}
+                    {a.email && <span className="block max-w-48 truncate text-sage-600" title={a.email}>{a.email}</span>}
                   </td>
                   <td className="p-3">{a.treatmentName}</td>
                   <td className="p-3 whitespace-nowrap">
-                    {a.preferredDate}
-                    <span className="block text-gray-600">{a.preferredTime}</span>
+                    {formatYmd(a.preferredDate)}
+                    <span className="block text-sage-600">{a.preferredTime}</span>
                   </td>
                   <td className="max-w-xs p-3 break-words whitespace-pre-wrap">{a.notes}</td>
                   <td className="p-3 whitespace-nowrap">{a.createdAt ? formatDateTime(a.createdAt) : ""}</td>
-                  <td className="p-3">
-                    <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${statusStyles[a.status]}`}>{a.status}</span>
+                  <td className="w-40 p-3">
+                    <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ${statusStyles[a.status]}`}>{a.status}</span>
                     <label className="sr-only" htmlFor={`s-${a.id}`}>
                       Change status for {a.name}
                     </label>
-                    <select id={`s-${a.id}`} className="no-print input mt-2 !min-h-9 !py-1 text-sm" value={a.status} onChange={(e) => changeStatus(a, e.target.value as AppointmentStatus)}>
+                    <select id={`s-${a.id}`} className="no-print input mt-2 !min-h-9 w-36 !px-2 !py-1 text-sm capitalize" value={a.status} onChange={(e) => changeStatus(a, e.target.value as AppointmentStatus)}>
                       {appointmentStatuses.map((s) => (
                         <option key={s} value={s}>
                           {s}
@@ -243,7 +243,7 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
               ))}
             </tbody>
           </table>
-          <div className="no-print flex items-center justify-between p-3 text-sm">
+          <div className="no-print flex items-center justify-between border-t border-sage-200 px-4 py-3 text-sm text-sage-600">
             <span>
               {filtered.length} result{filtered.length === 1 ? "" : "s"} · page {page + 1} of {pages}
             </span>
@@ -262,7 +262,7 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
       {/* Detail drawer */}
       <Dialog.Root open={!!current} onOpenChange={(o) => !o && setSelected(null)}>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-40 bg-black/40" />
+          <Dialog.Overlay className="fixed inset-0 z-40 bg-brand-950/30 backdrop-blur-[2px]" />
           <Dialog.Content className="fixed inset-y-0 right-0 z-50 w-full max-w-md overflow-y-auto bg-white p-6 shadow-xl">
             {current && (
               <>
@@ -272,10 +272,10 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
                     <X className="h-4 w-4" aria-hidden="true" />
                   </Dialog.Close>
                 </div>
-                <Dialog.Description className="text-sm text-gray-600">
+                <Dialog.Description className="text-sm text-sage-600">
                   {current.treatmentName} · {formatYmd(current.preferredDate)} · {current.preferredTime}
                 </Dialog.Description>
-                <dl className="mt-6 space-y-2 text-sm">
+                <dl className="mt-6 divide-y divide-sage-100 rounded-[var(--radius-soft)] border border-sage-200 text-sm">
                   {(
                     [
                       ["Phone", current.phone],
@@ -287,8 +287,8 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
                       ["Patient email", current.notifications.patientEmail],
                     ] as [string, string][]
                   ).map(([k, v]) => (
-                    <div key={k} className="grid grid-cols-3 gap-2">
-                      <dt className="font-semibold">{k}</dt>
+                    <div key={k} className="grid grid-cols-3 gap-2 px-4 py-2.5">
+                      <dt className="text-sage-600">{k}</dt>
                       <dd className="col-span-2 break-words whitespace-pre-wrap">{v}</dd>
                     </div>
                   ))}
@@ -308,7 +308,7 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
                     </a>
                   )}
                 </div>
-                <h3 className="mt-8 font-sans text-sm font-bold uppercase">Status history</h3>
+                <h3 className="mt-8 text-lg font-semibold">Status history</h3>
                 <ol className="mt-2 space-y-1 text-sm">
                   {current.statusHistory.map((h, i) => (
                     <li key={i}>
@@ -330,8 +330,8 @@ export function AppointmentsTable({ initial, loadError, isOwner, openId }: { ini
       {/* Delete confirmation (owners only) */}
       <Dialog.Root open={!!confirmDelete} onOpenChange={(o) => !o && setConfirmDelete(null)}>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50" />
-          <Dialog.Content role="alertdialog" className="fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white p-6 shadow-xl">
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-brand-950/40" />
+          <Dialog.Content role="alertdialog" className="fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-frame)] bg-white p-6 shadow-xl">
             <Dialog.Title className="text-xl font-semibold">Delete this request?</Dialog.Title>
             <Dialog.Description className="mt-2 text-sm">
               The request from {confirmDelete?.name} will be permanently deleted. This can&apos;t be undone.

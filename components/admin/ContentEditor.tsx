@@ -93,7 +93,7 @@ export function ContentEditor({
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl font-semibold">
+        <h1 className="text-[2.25rem] leading-tight font-semibold">
           {isNew ? "New" : "Edit"} {kind}
         </h1>
         <div className="flex gap-2">
@@ -123,7 +123,7 @@ export function ContentEditor({
       {msg && (
         <div
           role={msg.tone === "ok" ? "status" : "alert"}
-          className={`rounded-2xl p-4 text-sm ${msg.tone === "ok" ? "bg-brand-50 text-brand-800" : msg.tone === "warn" ? "bg-amber-50 text-amber-800" : "bg-red-50 text-red-700"}`}
+          className={`rounded-[var(--radius-soft)] p-4 text-sm ${msg.tone === "ok" ? "bg-brand-50 text-brand-800" : msg.tone === "warn" ? "bg-amber-50 text-amber-800" : "bg-red-50 text-red-700"}`}
         >
           <p>{msg.text}</p>
           {msg.issues && (
@@ -142,11 +142,11 @@ export function ContentEditor({
       )}
 
       {liveHits.length > 0 && !msg && (
-        <p className="rounded-2xl bg-amber-50 p-3 text-sm text-amber-800">Wording check: {liveHits.join(", ")} found. Medical text must not promise results or mention prices.</p>
+        <p className="rounded-[var(--radius-soft)] bg-amber-50 p-3 text-sm text-amber-800">Wording check: {liveHits.join(", ")} found. Medical text must not promise results or mention prices.</p>
       )}
 
       {seo && (
-        <div className="grid gap-2 rounded-2xl bg-white p-4 text-sm shadow-sm sm:grid-cols-2">
+        <div className="grid gap-2 rounded-[var(--radius-soft)] bg-white p-4 text-sm sm:grid-cols-2">
           {(["en", "te", "hi"] as const).map((l) => (
             <p key={l}>
               SEO title ({l}): <strong className={(seo.title?.[l]?.length ?? 0) > 60 ? "text-red-700" : ""}>{seo.title?.[l]?.length ?? 0}</strong>/60 · description:{" "}
@@ -157,7 +157,7 @@ export function ContentEditor({
       )}
 
       {(kind === "gallery" || kind === "treatment" || kind === "doctor") && (
-        <div className="rounded-2xl bg-white p-4 shadow-sm">
+        <div className="rounded-[var(--radius-frame)] border border-sage-200 bg-white p-4">
           <label htmlFor="upload" className="label">
             Upload an image (JPEG, PNG or WebP, up to 8 MB)
           </label>

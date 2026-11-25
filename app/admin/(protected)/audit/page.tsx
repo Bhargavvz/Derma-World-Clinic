@@ -9,13 +9,13 @@ export default async function AuditPage() {
   const res = await listAudit();
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-semibold">Audit log</h1>
+      <div><h1 className="text-[2.25rem] leading-tight font-semibold">Audit log</h1><p className="mt-1 text-sage-600">Every change made in the admin, newest first.</p></div>
       {!res.ok ? (
-        <p role="alert" className="rounded-2xl bg-red-50 p-3 text-red-700">
+        <p role="alert" className="rounded-[var(--radius-soft)] bg-red-50 p-3 text-red-700">
           Could not load the audit log.
         </p>
       ) : (
-        <div className="overflow-x-auto rounded-2xl bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-[var(--radius-frame)] border border-sage-200 bg-white">
           <table className="w-full text-left text-sm">
             <caption className="sr-only">Recent changes, newest first</caption>
             <thead className="bg-sage-100">

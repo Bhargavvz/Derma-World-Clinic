@@ -57,8 +57,8 @@ export function appointmentsCsv(list: Appointment[]): string {
 }
 
 export const statusStyles: Record<AppointmentStatus, string> = {
-  pending: "bg-amber-100 text-amber-900",
-  confirmed: "bg-brand-100 text-brand-900",
-  cancelled: "bg-red-100 text-red-800",
-  completed: "bg-sage-200 text-gray-900",
+  pending: "bg-amber-50 text-amber-800 ring-1 ring-amber-200",
+  confirmed: "bg-emerald-50 text-emerald-800 ring-1 ring-emerald-200",
+  cancelled: "bg-red-50 text-red-700 ring-1 ring-red-200",
+  completed: "bg-sage-100 text-sage-600 ring-1 ring-sage-200",
 };

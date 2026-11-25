@@ -48,7 +48,7 @@ export function StaffManager({ initial, myUid }: { initial: { staff: StaffRow[];
         </button>
       </form>
       {msg && (
-        <div role="status" className="rounded-2xl bg-brand-50 p-4 text-sm text-brand-800">
+        <div role="status" className="rounded-[var(--radius-soft)] bg-brand-50 p-4 text-sm text-brand-800">
           <p>{msg}</p>
           {link && (
             <p className="mt-2 break-all">
@@ -122,7 +122,7 @@ export function StaffManager({ initial, myUid }: { initial: { staff: StaffRow[];
       <section className="card">
         <h2 className="text-xl font-semibold">Pending invitations</h2>
         {initial.invites.length === 0 ? (
-          <p className="mt-2 text-sm text-gray-600">None.</p>
+          <p className="mt-2 text-sm text-sage-600">None.</p>
         ) : (
           <ul className="mt-3 divide-y divide-sage-100 text-sm">
             {initial.invites.map((i) => (

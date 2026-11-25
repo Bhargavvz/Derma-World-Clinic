@@ -31,13 +31,13 @@ export async function Footer() {
           <ul className="mt-3">
             {navItems.map((n) => (
               <li key={n.href}>
-                <Link href={n.href} className="inline-flex min-h-10 items-center text-[0.9375rem] hover:text-lagoon-700">
+                <Link href={n.href} className="inline-flex min-h-10 items-center text-[0.9375rem] hover:text-rose-700">
                   {t(`nav.${n.key}`)}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/appointment" className="inline-flex min-h-10 items-center text-[0.9375rem] font-semibold text-lagoon-700 hover:text-lagoon-800">
+              <Link href="/appointment" className="inline-flex min-h-10 items-center text-[0.9375rem] font-semibold text-rose-700 hover:text-rose-800">
                 {t("common.bookAnAppointment")}
               </Link>
             </li>
@@ -49,7 +49,7 @@ export async function Footer() {
           <ul className="mt-3 text-[0.9375rem]">
             {treatments.map((tr) => (
               <li key={tr.slug}>
-                <Link href={`/treatments/${tr.slug}`} className="inline-flex min-h-9 items-center hover:text-lagoon-700">
+                <Link href={`/treatments/${tr.slug}`} className="inline-flex min-h-9 items-center hover:text-rose-700">
                   {L(tr.name, locale, tr.reviewStatus)}
                 </Link>
               </li>

@@ -1,45 +1,47 @@
 @import "tailwindcss";
 
-/*
- * Derma World — visual system
- * Colours come from the clinic's own logo and signboard: the deep indigo of
- * "DERMA" and the lagoon teal of "WORLD / SKIN & HAIR CLINIC".
- *   brand  = indigo (headings, dark bands, primary surfaces)
- *   lagoon = teal   (actions, links, live status)
- *   sage   = cool porcelain/mist neutrals (kept as the name used across pages)
- */
+/* Derma World: blush, plum and rose gold. */
 @theme {
-  --color-brand-50: #f3f2fa;
-  --color-brand-100: #e4e1f3;
-  --color-brand-200: #c9c3e6;
-  --color-brand-300: #a69ed3;
-  --color-brand-400: #7d72bb;
-  --color-brand-500: #5d51a6;
-  --color-brand-600: #4a3e94;
-  --color-brand-700: #3c317e;
-  --color-brand-800: #2e2667;
-  --color-brand-900: #221c4f;
-  --color-brand-950: #161236;
+  /* plum: headings, the one bold band */
+  --color-brand-50: #fbf3f7;
+  --color-brand-100: #f4e2ec;
+  --color-brand-200: #e8c5d8;
+  --color-brand-300: #d39fbb;
+  --color-brand-400: #b46f95;
+  --color-brand-500: #934d75;
+  --color-brand-600: #74385c;
+  --color-brand-700: #5f2c4c;
+  --color-brand-800: #4a1f3d;
+  --color-brand-900: #3a1730;
+  --color-brand-950: #260e20;
 
-  --color-lagoon-50: #eef8f8;
-  --color-lagoon-100: #d3eeee;
-  --color-lagoon-200: #a7dcdd;
-  --color-lagoon-300: #6fc1c4;
-  --color-lagoon-400: #3fa2a7;
-  --color-lagoon-500: #24878d;
-  --color-lagoon-600: #1b7177;
-  --color-lagoon-700: #175b61;
-  --color-lagoon-800: #154a4f;
+  /* rose: actions and links */
+  --color-rose-50: #fdf2f5;
+  --color-rose-100: #fbe3ea;
+  --color-rose-200: #f5c6d4;
+  --color-rose-300: #eb9db4;
+  --color-rose-400: #d9718f;
+  --color-rose-500: #c25478;
+  --color-rose-600: #b0476b;
+  --color-rose-700: #933857;
+  --color-rose-800: #772e48;
 
-  --color-sage-50: #f5f7f9;
-  --color-sage-100: #eaeef2;
-  --color-sage-200: #d9e0e7;
-  --color-sage-300: #bcc6d1;
-  --color-sage-400: #95a2b0;
-  --color-sage-500: #6b7887;
-  --color-sage-600: #4e5967;
+  /* blush neutrals (kept under the "sage" name used across pages) */
+  --color-sage-50: #fbf4f2;
+  --color-sage-100: #f6eae7;
+  --color-sage-200: #eedcd7;
+  --color-sage-300: #dfc6bf;
+  --color-sage-400: #b9a19a;
+  --color-sage-500: #806a64;
+  --color-sage-600: #6b5650;
 
-  --color-ink: #23262f;
+  /* rose gold accent */
+  --color-gold-200: #ecdcc9;
+  --color-gold-300: #dfc3a3;
+  --color-gold-400: #c9a27e;
+  --color-gold-600: #9c7550;
+
+  --color-ink: #2f2229;
 
   --color-whatsapp: #0e7a6d;
   --color-whatsapp-dark: #0b6358;
@@ -96,10 +98,10 @@
     text-wrap: pretty;
   }
   ::selection {
-    @apply bg-lagoon-200 text-brand-950;
+    @apply bg-rose-200 text-brand-950;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-3 outline-lagoon-500;
+    @apply outline-2 outline-offset-3 outline-rose-500;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -129,7 +131,7 @@
   @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-soft)] px-5 py-3 text-[0.9375rem] font-semibold transition-[background-color,color,border-color,box-shadow] duration-200 disabled:cursor-not-allowed disabled:opacity-60;
 }
 @utility btn-primary {
-  @apply btn bg-lagoon-600 text-white shadow-[inset_0_-2px_0_rgba(0,0,0,0.18)] hover:bg-lagoon-700;
+  @apply btn bg-rose-600 text-white shadow-[inset_0_-2px_0_rgba(0,0,0,0.18)] hover:bg-rose-700;
 }
 @utility btn-secondary {
   @apply btn border border-sage-300 bg-white text-brand-800 hover:border-brand-400 hover:bg-brand-50;
@@ -141,11 +143,11 @@
   @apply btn bg-whatsapp text-white hover:bg-whatsapp-dark;
 }
 @utility btn-whatsapp-outline {
-  @apply btn border border-sage-300 bg-white text-whatsapp hover:border-whatsapp hover:bg-lagoon-50;
+  @apply btn border border-sage-300 bg-white text-whatsapp hover:border-whatsapp hover:bg-rose-50;
 }
 /* Small sentence-case context line above a heading — used sparingly. */
 @utility eyebrow {
-  @apply mb-3 text-[0.9375rem] font-semibold text-lagoon-600;
+  @apply mb-3 text-[0.9375rem] font-semibold text-rose-600;
 }
 @utility section-title {
   @apply text-[2rem] leading-[1.15] font-semibold sm:text-[2.625rem];
@@ -154,7 +156,7 @@
   @apply text-lg leading-relaxed text-sage-600 sm:text-[1.1875rem];
 }
 @utility link {
-  @apply font-semibold text-lagoon-700 underline decoration-lagoon-300 decoration-2 underline-offset-4 hover:decoration-lagoon-600;
+  @apply font-semibold text-rose-700 underline decoration-rose-300 decoration-2 underline-offset-4 hover:decoration-rose-600;
 }
 @utility prose-clinic {
   & p {
@@ -164,14 +166,14 @@
     @apply mt-12 mb-4 text-[1.75rem] font-semibold;
   }
   & ul {
-    @apply mb-5 list-disc space-y-1.5 pl-6 marker:text-lagoon-500;
+    @apply mb-5 list-disc space-y-1.5 pl-6 marker:text-rose-500;
   }
   & a {
     @apply link;
   }
 }
 @utility input {
-  @apply block min-h-12 w-full rounded-[var(--radius-soft)] border border-sage-300 bg-white px-4 py-3 text-ink placeholder:text-sage-500 focus:border-lagoon-500 focus:ring-3 focus:ring-lagoon-100 focus:outline-none aria-[invalid=true]:border-red-700;
+  @apply block min-h-12 w-full rounded-[var(--radius-soft)] border border-sage-300 bg-white px-4 py-3 text-ink placeholder:text-sage-500 focus:border-rose-500 focus:ring-3 focus:ring-rose-100 focus:outline-none aria-[invalid=true]:border-red-700;
 }
 @utility label {
   @apply mb-1.5 block text-[0.9375rem] font-semibold text-ink;

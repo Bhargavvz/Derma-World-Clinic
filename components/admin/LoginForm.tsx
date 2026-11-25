@@ -111,9 +111,9 @@ export function LoginForm() {
   }
 
   return (
-    <div className="card space-y-5">
+    <div className="space-y-5 rounded-[var(--radius-frame)] border border-sage-200 bg-white p-6 sm:p-8">
       {msg && (
-        <p role={msg.tone === "error" ? "alert" : "status"} className={`rounded-2xl p-3 text-sm ${msg.tone === "error" ? "bg-red-50 text-red-700" : "bg-brand-50 text-brand-800"}`}>
+        <p role={msg.tone === "error" ? "alert" : "status"} className={`rounded-[var(--radius-soft)] border-l-4 p-3 text-sm ${msg.tone === "error" ? "border-red-600 bg-red-50 text-red-800" : "border-rose-400 bg-rose-50 text-brand-800"}`}>
           {msg.text}
         </p>
       )}
@@ -134,10 +134,10 @@ export function LoginForm() {
           {busy ? "Signing in…" : "Sign in"}
         </button>
       </form>
-      <button type="button" onClick={onReset} className="text-sm font-semibold text-brand-700 underline">
+      <button type="button" onClick={onReset} className="text-sm font-semibold text-rose-700 underline-offset-4 hover:underline">
         Forgot password?
       </button>
-      <div className="flex items-center gap-3 text-xs text-gray-500" aria-hidden="true">
+      <div className="flex items-center gap-3 text-xs text-sage-500" aria-hidden="true">
         <span className="h-px flex-1 bg-sage-200" /> or <span className="h-px flex-1 bg-sage-200" />
       </div>
       <button type="button" onClick={onGoogle} className="btn-secondary w-full" disabled={busy}>

@@ -67,7 +67,7 @@ export function InfoNote({ children, tone = "info" }: { children: ReactNode; ton
     <div
       className={cn(
         "rounded-[var(--radius-soft)] border-l-4 p-4 text-[0.9375rem] leading-relaxed",
-        tone === "warn" ? "border-amber-500 bg-amber-50 text-amber-900" : "border-lagoon-400 bg-lagoon-50 text-ink/85",
+        tone === "warn" ? "border-amber-500 bg-amber-50 text-amber-900" : "border-rose-400 bg-rose-50 text-ink/85",
       )}
     >
       {children}

@@ -75,10 +75,10 @@ export default async function ContactPage({ params }: Props) {
             <MapEmbed embedUrl={clinic.mapsEmbedUrl} />
           </div>
           <div className="space-y-6">
-            <div className="card bg-brand-800 text-white">
-              <h2 className="text-2xl font-semibold text-white">{t("contact.wantToBook")}</h2>
-              <p className="mt-2 text-brand-50">{t("contact.wantToBookText")}</p>
-              <Link href="/appointment" className="btn-light mt-5">
+            <div className="card border-rose-200 bg-rose-50">
+              <h2 className="text-2xl font-semibold">{t("contact.wantToBook")}</h2>
+              <p className="mt-2 text-ink/80">{t("contact.wantToBookText")}</p>
+              <Link href="/appointment" className="btn-primary mt-5">
                 {t("common.bookAnAppointment")}
               </Link>
             </div>

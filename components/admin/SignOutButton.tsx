@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { LogOut } from "lucide-react";
 import { clientApp } from "@/lib/firebase/client";
 
-export function SignOutButton() {
+export function SignOutButton({ compact = false }: { compact?: boolean }) {
   const [busy, setBusy] = useState(false);
   return (
     <button
       type="button"
       disabled={busy}
-      className="btn-light !min-h-9 !py-1"
+      className={compact ? "btn-secondary !min-h-10 !px-3" : "btn-secondary w-full !min-h-10"}
       onClick={async () => {
         setBusy(true);
         await fetch("/api/auth/session", { method: "DELETE" }).catch(() => undefined);
@@ -21,7 +22,8 @@ export function SignOutButton() {
         window.location.assign("/admin/login");
       }}
     >
-      {busy ? "Signing out…" : "Sign out"}
+      <LogOut className="h-4 w-4" aria-hidden="true" />
+      <span className={compact ? "sr-only" : undefined}>{busy ? "Signing out…" : "Sign out"}</span>
     </button>
   );
 }

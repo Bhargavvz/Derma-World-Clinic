@@ -128,16 +128,16 @@ export default async function TreatmentPage({ params }: Props) {
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <div className="card bg-brand-900 text-white">
-            <h2 className="text-2xl font-semibold text-white">{t("treatments.bookTitle")}</h2>
-            <p className="mt-3 text-sm text-brand-50">{t("treatments.bookText")}</p>
+          <div className="card border-rose-200 bg-rose-50">
+            <h2 className="text-2xl font-semibold">{t("treatments.bookTitle")}</h2>
+            <p className="mt-3 text-sm text-ink/80">{t("treatments.bookText")}</p>
             <div className="mt-6 flex flex-col gap-3">
               {tr.bookable && (
-                <Link href={{ pathname: "/appointment", query: { treatment: tr.slug } }} className="btn-light">
+                <Link href={{ pathname: "/appointment", query: { treatment: tr.slug } }} className="btn-primary">
                   {t("common.bookAnAppointment")}
                 </Link>
               )}
-              <WhatsAppLink variant="light" message={`${t("whatsapp.default")} (${name})`} />
+              <WhatsAppLink variant="outline" message={`${t("whatsapp.default")} (${name})`} />
             </div>
           </div>
         </aside>

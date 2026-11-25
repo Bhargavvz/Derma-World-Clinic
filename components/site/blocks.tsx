@@ -14,14 +14,14 @@ import { TrackedLink } from "./TrackedLink";
 export async function CtaBanner() {
   const t = await getTranslations();
   return (
-    <section className="no-print bg-brand-900 text-white">
+    <section className="no-print relative overflow-hidden bg-brand-800 text-white">
       <div className="container-page grid items-end gap-10 py-18 sm:py-24 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <h2 className="text-[2.25rem] leading-[1.1] font-semibold text-white sm:text-[3rem]">{t("cta.title")}</h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-100">{t("cta.text")}</p>
         </div>
         <div className="flex flex-wrap gap-3 lg:justify-end">
-          <Link href="/appointment" className="btn bg-lagoon-400 text-brand-950 hover:bg-lagoon-300">
+          <Link href="/appointment" className="btn bg-gold-300 text-brand-950 hover:bg-gold-200">
             {t("common.bookAnAppointment")}
           </Link>
           <WhatsAppLink variant="light" />
@@ -57,7 +57,7 @@ export function FaqList({ faqs }: { faqs: { question: string; answer: string }[]
         <details key={i} className="group border-b border-sage-300">
           <summary className="flex min-h-11 cursor-pointer list-none items-start justify-between gap-6 py-6 text-brand-900 [&::-webkit-details-marker]:hidden">
             <h3 className="font-display text-xl leading-snug font-semibold sm:text-[1.375rem]">{f.question}</h3>
-            <span aria-hidden="true" className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-sage-300 text-lg leading-none text-lagoon-600 transition-transform duration-300 group-open:rotate-45 group-open:border-lagoon-400">
+            <span aria-hidden="true" className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-sage-300 text-lg leading-none text-rose-600 transition-transform duration-300 group-open:rotate-45 group-open:border-rose-400">
               +
             </span>
           </summary>
@@ -86,14 +86,14 @@ export async function TreatmentCard({ treatment, priority = false }: { treatment
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
       </div>
-      <p className="mt-5 text-sm font-medium text-lagoon-700">{t(`groups.${treatment.group}`)}</p>
+      <p className="mt-5 text-sm font-medium text-rose-700">{t(`groups.${treatment.group}`)}</p>
       <h3 className="mt-1 text-[1.5rem] leading-snug font-semibold">
-        <Link href={`/treatments/${treatment.slug}`} className="after:absolute after:inset-0 hover:text-lagoon-700 focus-visible:outline-none focus-visible:after:rounded-[var(--radius-frame)] focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-lagoon-500">
+        <Link href={`/treatments/${treatment.slug}`} className="after:absolute after:inset-0 hover:text-rose-700 focus-visible:outline-none focus-visible:after:rounded-[var(--radius-frame)] focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-rose-500">
           {name}
         </Link>
       </h3>
       <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-ink/80">{L(treatment.summary, locale, treatment.reviewStatus)}</p>
-      <p aria-hidden="true" className="mt-4 inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-brand-800 group-hover:text-lagoon-700">
+      <p aria-hidden="true" className="mt-4 inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-brand-800 group-hover:text-rose-700">
         {t("learnMore")}
         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
       </p>

@@ -27,23 +27,24 @@ export default async function ContentIndex() {
     getHomeFaqs(),
   ]);
   const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <section className="card">
-      <h2 className="text-xl font-semibold">{title}</h2>
+    <section className="rounded-[var(--radius-frame)] border border-sage-200 bg-white p-6">
+      <h2 className="text-[1.375rem] font-semibold">{title}</h2>
       <div className="mt-3">{children}</div>
     </section>
   );
   const item = (href: string, label: string, extra?: string) => (
-    <li key={href}>
-      <Link href={href} className="inline-flex min-h-9 items-center text-brand-700 underline">
-        {label}
+    <li key={href} className="border-b border-sage-100 last:border-0">
+      <Link href={href} className="group -mx-2 flex min-h-11 items-center gap-3 rounded-[var(--radius-soft)] px-2 text-ink hover:bg-sage-50 hover:text-rose-700">
+        <span className="flex-1">{label}</span>
+        {extra && <span className="text-xs text-sage-600">{extra}</span>}
+        <span aria-hidden="true" className="text-sage-400 group-hover:text-rose-600">›</span>
       </Link>
-      {extra && <span className="ml-2 text-xs text-gray-600">{extra}</span>}
     </li>
   );
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-semibold">Content</h1>
-      <p className="max-w-3xl text-sm text-gray-700">
+      <h1 className="text-[2.25rem] leading-tight font-semibold">Website content</h1>
+      <p className="max-w-3xl text-sage-600">
         Changes are validated, checked for medical wording, saved, recorded in the audit log, and the public pages update within seconds. Telugu and Hindi
         text stays hidden (English is shown, not indexed) until its review status is set to <code>reviewed</code> by a qualified reviewer.
       </p>

@@ -67,8 +67,8 @@ export function OpenStatus({ hours, tone = "light" }: { hours: Hours; tone?: "li
   return (
     <p className={`flex items-center gap-2.5 text-[0.9375rem] font-semibold ${tone === "dark" ? "text-white" : "text-ink"}`} role="status">
       <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
-        {open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lagoon-400 opacity-60 motion-reduce:hidden" />}
-        <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${open ? "bg-lagoon-500" : "bg-sage-400"}`} />
+        {open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-400 opacity-60 motion-reduce:hidden" />}
+        <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${open ? "bg-rose-500" : "bg-sage-400"}`} />
       </span>
       {text}
     </p>

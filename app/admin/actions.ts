@@ -63,7 +63,7 @@ function toAppointment(id: string, d: DocumentData): Appointment {
     source: "web",
     createdAt: iso(d.createdAt),
     updatedAt: iso(d.updatedAt),
-    statusHistory: Array.isArray(d.statusHistory) ? d.statusHistory : [],
+    statusHistory: Array.isArray(d.statusHistory) ? d.statusHistory.map((h: { status: AppointmentStatus; by: string; at: unknown }) => ({ ...h, at: iso(h.at) })) : [],
     notifications: d.notifications ?? { clinicEmail: "skipped", patientEmail: "skipped" },
   };
 }

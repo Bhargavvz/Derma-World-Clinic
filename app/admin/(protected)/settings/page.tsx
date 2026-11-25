@@ -30,7 +30,7 @@ export default async function SettingsPage() {
   ];
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-semibold">Settings</h1>
+      <h1 className="text-[2.25rem] leading-tight font-semibold">Settings</h1>
       <section className="card">
         <h2 className="text-xl font-semibold">Integrations</h2>
         <ul className="mt-4 divide-y divide-sage-100">
@@ -40,7 +40,7 @@ export default async function SettingsPage() {
                 {name}:{" "}
                 <span className={ok ? "text-brand-700" : "text-amber-800"}>{ok ? "configured" : "not configured"}</span>
               </p>
-              <p className="text-sm text-gray-600">{note}</p>
+              <p className="text-sm text-sage-600">{note}</p>
             </li>
           ))}
         </ul>

@@ -74,45 +74,45 @@ export default async function HomePage({ params }: Props) {
       <TranslationNotice show={!indexable.includes(locale)} />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-brand-900 text-white">
-        <Swoosh className="pointer-events-none absolute hidden lg:block -top-24 right-[-12rem] h-[44rem] w-[44rem] text-lagoon-400/35 lg:right-[-6rem]" />
+      <section className="relative overflow-hidden bg-sage-50">
+        <Swoosh className="pointer-events-none absolute hidden lg:block -top-24 right-[-12rem] h-[44rem] w-[44rem] text-gold-400/60 lg:right-[-6rem]" />
         <div className="container-page relative grid gap-14 pt-14 pb-20 sm:pt-20 lg:grid-cols-[1.08fr_1fr] lg:gap-16 lg:pt-24 lg:pb-28">
           <div className="animate-rise lg:pt-6">
-            <p className="text-[0.9375rem] font-medium text-lagoon-300">{t("home.pill")}</p>
-            <h1 className="mt-5 text-[2.75rem] leading-[1.02] font-semibold text-white sm:text-[4rem] lg:text-[4.75rem]">
+            <p className="inline-flex items-center gap-2 text-[0.9375rem] font-medium text-rose-700"><span aria-hidden="true" className="h-px w-8 bg-gold-400" />{t("home.pill")}</p>
+            <h1 className="mt-5 text-[2.75rem] leading-[1.02] font-semibold text-brand-800 sm:text-[4rem] lg:text-[4.75rem]">
               <span className="sr-only">{t("home.h1Sr")} </span>
               {t("home.h1")}
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-brand-100 sm:text-[1.25rem]">{t("home.intro")}</p>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink/75 sm:text-[1.25rem]">{t("home.intro")}</p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link href="/appointment" className="btn bg-lagoon-400 text-brand-950 hover:bg-lagoon-300">
+              <Link href="/appointment" className="btn-primary">
                 <CalendarCheck className="h-[1.125rem] w-[1.125rem]" aria-hidden="true" />
                 {t("common.bookAnAppointment")}
               </Link>
-              <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="btn border border-white/30 text-white hover:border-white/60 hover:bg-white/5">
+              <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="btn-secondary">
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 {t("common.call", { phone: primary.display })}
               </TrackedLink>
             </div>
 
-            <Link href="/doctor" className="group mt-12 flex max-w-md items-center gap-4 border-t border-white/15 pt-6">
-              <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-lagoon-400/60">
+            <Link href="/doctor" className="group mt-12 flex max-w-md items-center gap-4 border-t border-sage-300 pt-6">
+              <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-gold-300">
                 <Image src={doctor.photo.path} alt="" fill sizes="56px" className="object-cover object-top" />
               </span>
               <span>
-                <span className="block text-sm text-brand-200">{t("hero.doctorLine")}</span>
-                <span className="block font-display text-lg font-semibold text-white group-hover:text-lagoon-200">{doctor.name}</span>
-                <span className="block text-sm text-brand-200">{doctor.qualificationsShort}</span>
+                <span className="block text-sm text-sage-600">{t("hero.doctorLine")}</span>
+                <span className="block font-display text-lg font-semibold text-brand-800 group-hover:text-rose-700">{doctor.name}</span>
+                <span className="block text-sm text-sage-600">{doctor.qualificationsShort}</span>
               </span>
             </Link>
           </div>
 
           <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-frame)] bg-brand-800 lg:ml-10">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-frame)] bg-sage-200 lg:ml-10">
               <Image src={heroClinicImage.path} alt={L(heroClinicImage.alt, locale)} fill priority fetchPriority="high" sizes="(min-width: 1024px) 520px, 92vw" className="object-cover" />
             </div>
             {/* Clinic card, modelled on the visiting card */}
-            <div className="relative -mt-24 mr-4 ml-4 animate-card-in rounded-[var(--radius-frame)] bg-white p-6 text-ink shadow-[0_24px_60px_-20px_rgba(22,18,54,0.55)] sm:mr-auto sm:ml-0 sm:max-w-sm lg:absolute lg:-bottom-10 lg:-left-6 lg:mt-0">
+            <div className="relative -mt-24 mr-4 ml-4 animate-card-in rounded-[var(--radius-frame)] bg-white p-6 text-ink shadow-[0_24px_60px_-24px_rgba(74,31,61,0.35)] ring-1 ring-sage-200 sm:mr-auto sm:ml-0 sm:max-w-sm lg:absolute lg:-bottom-10 lg:-left-6 lg:mt-0">
               <p className="font-display text-xl font-semibold text-brand-900">{t("hero.cardTitle")}</p>
               <div className="mt-3">
                 <OpenStatus hours={hours} />
@@ -124,12 +124,12 @@ export default async function HomePage({ params }: Props) {
               </p>
               <p className="mt-2 text-sm text-sage-600">{tr(clinic.shortHours)}</p>
               <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 border-t border-sage-200 pt-4 text-[0.9375rem] font-semibold">
-                <TrackedLink event="directions_click" href={directionsUrl(clinic)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-lagoon-700 hover:text-lagoon-800">
+                <TrackedLink event="directions_click" href={directionsUrl(clinic)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-rose-700 hover:text-rose-800">
                   <MapPin className="h-4 w-4" aria-hidden="true" />
                   {t("hero.directions")}
                   <span className="sr-only"> ({t("common.opensNewTab")})</span>
                 </TrackedLink>
-                <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="inline-flex min-h-11 items-center gap-1.5 text-brand-800 hover:text-lagoon-700">
+                <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="inline-flex min-h-11 items-center gap-1.5 text-brand-800 hover:text-rose-700">
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   {primary.display}
                 </TrackedLink>
@@ -152,7 +152,7 @@ export default async function HomePage({ params }: Props) {
           <div className="space-y-14">
             {groups.map((g) => (
               <div key={g.title}>
-                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-brand-900 pb-3">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-gold-400 pb-3">
                   <h3 className="text-[1.625rem] font-semibold">{g.title}</h3>
                   <p className="text-[0.9375rem] text-sage-600">{g.text}</p>
                 </div>
@@ -164,10 +164,10 @@ export default async function HomePage({ params }: Props) {
                           <Image src={x.image.path} alt="" fill sizes="88px" className="object-cover" />
                         </span>
                         <span>
-                          <span className="block font-display text-xl font-semibold text-brand-900 group-hover:text-lagoon-700 sm:text-[1.375rem]">{L(x.name, locale, x.reviewStatus)}</span>
+                          <span className="block font-display text-xl font-semibold text-brand-900 group-hover:text-rose-700 sm:text-[1.375rem]">{L(x.name, locale, x.reviewStatus)}</span>
                           <span className="mt-1 line-clamp-2 block text-[0.9375rem] leading-relaxed text-ink/75">{L(x.summary, locale, x.reviewStatus)}</span>
                         </span>
-                        <ArrowRight className="h-5 w-5 text-sage-400 transition-[transform,color] duration-300 group-hover:translate-x-1 group-hover:text-lagoon-600" aria-hidden="true" />
+                        <ArrowRight className="h-5 w-5 text-sage-400 transition-[transform,color] duration-300 group-hover:translate-x-1 group-hover:text-rose-600" aria-hidden="true" />
                       </Link>
                     </li>
                   ))}
@@ -238,8 +238,8 @@ export default async function HomePage({ params }: Props) {
           <h2 className="section-title max-w-2xl">{t("home.expectTitle")}</h2>
           <ul className="mt-14 grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {expect.map(({ icon: Icon, title, text }) => (
-              <li key={title} className="border-t-2 border-lagoon-500 pt-6">
-                <Icon className="h-6 w-6 text-lagoon-600" aria-hidden="true" strokeWidth={1.75} />
+              <li key={title} className="border-t-2 border-gold-400 pt-6">
+                <Icon className="h-6 w-6 text-rose-600" aria-hidden="true" strokeWidth={1.75} />
                 <h3 className="mt-5 text-[1.375rem] leading-snug font-semibold">{title}</h3>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/80">{text}</p>
               </li>
@@ -249,14 +249,14 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* Inside the clinic */}
-      <section className="overflow-hidden bg-brand-950 py-18 text-white sm:py-24">
+      <section className="overflow-hidden bg-sage-100 py-18 sm:py-24">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-xl">
-              <h2 className="section-title text-white">{t("home.insideTitle")}</h2>
-              <p className="mt-4 text-lg leading-relaxed text-brand-200">{t("hero.insideText")}</p>
+              <h2 className="section-title">{t("home.insideTitle")}</h2>
+              <p className="lede mt-4">{t("hero.insideText")}</p>
             </div>
-            <Link href="/gallery" className="btn border border-white/30 text-white hover:border-white/60 hover:bg-white/5">
+            <Link href="/gallery" className="btn-secondary">
               {t("common.viewGallery")}
             </Link>
           </div>
@@ -264,10 +264,10 @@ export default async function HomePage({ params }: Props) {
             {gallery.slice(0, 4).map((g, i) => (
               <li key={g.id} className={i % 2 === 1 ? "lg:mt-16" : undefined}>
                 <figure>
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-frame)] bg-brand-900">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-frame)] bg-sage-200">
                     <Image src={g.image.path} alt={L(g.image.alt, locale, g.reviewStatus)} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
                   </div>
-                  <figcaption className="mt-3 text-[0.9375rem] text-brand-200">{L(g.caption, locale, g.reviewStatus)}</figcaption>
+                  <figcaption className="mt-3 text-[0.9375rem] text-sage-600">{L(g.caption, locale, g.reviewStatus)}</figcaption>
                 </figure>
               </li>
             ))}
@@ -283,7 +283,7 @@ export default async function HomePage({ params }: Props) {
             <span aria-hidden="true" className="absolute top-6 right-[16%] left-[16%] hidden h-px bg-sage-300 md:block" />
             {[1, 2, 3].map((n) => (
               <li key={n} className="relative md:text-center">
-                <span aria-hidden="true" className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-lagoon-500 bg-white font-display text-xl font-semibold text-brand-900 md:mx-auto">
+                <span aria-hidden="true" className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-rose-500 bg-white font-display text-xl font-semibold text-brand-900 md:mx-auto">
                   {n}
                 </span>
                 <h3 className="mt-5 text-[1.375rem] font-semibold">{t(`home.step${n}`)}</h3>
