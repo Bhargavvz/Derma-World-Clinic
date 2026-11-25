@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env
+.env.local
+.env.*.local
+*.log
+service-account*.json
+coverage
+playwright-report
+test-results
+lighthouse-reports
+next-env.d.ts
+.firebase
+*.tsbuildinfo
