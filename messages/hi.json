@@ -1,0 +1,45 @@
+{
+  "_meta": { "reviewStatus": "draft", "note": "Machine-drafted. Needs review by a qualified Hindi speaker before marking reviewed." },
+  "common": {
+    "bookAppointment": "अपॉइंटमेंट बुक करें",
+    "bookAnAppointment": "अपॉइंटमेंट बुक करें",
+    "whatsapp": "व्हाट्सऐप",
+    "getDirections": "रास्ता देखें",
+    "viewOnMaps": "Google Maps पर देखें",
+    "home": "होम",
+    "skipToContent": "सामग्री पर जाएँ",
+    "phone": "फ़ोन",
+    "address": "पता",
+    "openingHours": "खुलने का समय",
+    "chatWhatsApp": "व्हाट्सऐप पर हमसे बात करें",
+    "translationNotice": "यह पेज अभी आपकी भाषा में उपलब्ध नहीं है, इसलिए अंग्रेज़ी में दिखाया जा रहा है।",
+    "language": "भाषा"
+  },
+  "nav": {
+    "home": "होम",
+    "about": "हमारे बारे में",
+    "doctor": "हमारे डॉक्टर",
+    "treatments": "उपचार",
+    "gallery": "गैलरी",
+    "contact": "संपर्क",
+    "openMenu": "मेनू खोलें",
+    "closeMenu": "मेनू बंद करें",
+    "menu": "मेनू"
+  },
+  "footer": { "explore": "देखें", "treatments": "उपचार", "visitUs": "हमसे मिलें", "privacy": "गोपनीयता नीति", "cookieSettings": "कुकी सेटिंग्स" },
+  "consent": { "accept": "एनालिटिक्स स्वीकार करें", "reject": "अस्वीकार करें", "privacy": "गोपनीयता नीति" },
+  "langSuggest": { "text": "यह वेबसाइट {language} में भी उपलब्ध है।", "switch": "बदलें", "dismiss": "रहने दें" },
+  "whatsapp": {
+    "greeting": "नमस्ते Derma World Skin & Hair Clinic,",
+    "bookIntro": "मैं एक अपॉइंटमेंट बुक करना चाहता/चाहती हूँ।",
+    "patientName": "मरीज़ का नाम",
+    "phone": "फ़ोन नंबर",
+    "email": "ईमेल",
+    "treatment": "उपचार",
+    "date": "पसंदीदा तारीख",
+    "time": "पसंदीदा समय",
+    "notes": "नोट्स",
+    "closing": "कृपया मेरा अपॉइंटमेंट कन्फ़र्म करें। धन्यवाद।",
+    "contactIntro": "नमस्ते Derma World Skin & Hair Clinic, मैं {name} हूँ।"
+  }
+}

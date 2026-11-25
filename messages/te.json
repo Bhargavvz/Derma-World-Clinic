@@ -1,0 +1,45 @@
+{
+  "_meta": { "reviewStatus": "draft", "note": "Machine-drafted. Needs review by a qualified Telugu speaker before marking reviewed." },
+  "common": {
+    "bookAppointment": "అపాయింట్‌మెంట్ బుక్ చేయండి",
+    "bookAnAppointment": "అపాయింట్‌మెంట్ బుక్ చేయండి",
+    "whatsapp": "వాట్సాప్",
+    "getDirections": "దారి చూపించు",
+    "viewOnMaps": "Google Maps లో చూడండి",
+    "home": "హోమ్",
+    "skipToContent": "కంటెంట్‌కు వెళ్ళండి",
+    "phone": "ఫోన్",
+    "address": "చిరునామా",
+    "openingHours": "పని వేళలు",
+    "chatWhatsApp": "వాట్సాప్‌లో మాతో మాట్లాడండి",
+    "translationNotice": "ఈ పేజీ ఇంకా మీ భాషలో అందుబాటులో లేదు, అందుకే ఇంగ్లీష్‌లో చూపబడుతోంది.",
+    "language": "భాష"
+  },
+  "nav": {
+    "home": "హోమ్",
+    "about": "మా గురించి",
+    "doctor": "మా డాక్టర్",
+    "treatments": "చికిత్సలు",
+    "gallery": "గ్యాలరీ",
+    "contact": "సంప్రదించండి",
+    "openMenu": "మెనూ తెరవండి",
+    "closeMenu": "మెనూ మూసివేయండి",
+    "menu": "మెనూ"
+  },
+  "footer": { "explore": "చూడండి", "treatments": "చికిత్సలు", "visitUs": "మమ్మల్ని సందర్శించండి", "privacy": "గోప్యతా విధానం", "cookieSettings": "కుకీ సెట్టింగ్‌లు" },
+  "consent": { "accept": "అనలిటిక్స్ అంగీకరించండి", "reject": "తిరస్కరించండి", "privacy": "గోప్యతా విధానం" },
+  "langSuggest": { "text": "ఈ వెబ్‌సైట్ {language} లో కూడా అందుబాటులో ఉంది.", "switch": "మార్చండి", "dismiss": "వద్దు" },
+  "whatsapp": {
+    "greeting": "నమస్తే Derma World Skin & Hair Clinic,",
+    "bookIntro": "నేను అపాయింట్‌మెంట్ బుక్ చేయాలనుకుంటున్నాను.",
+    "patientName": "రోగి పేరు",
+    "phone": "ఫోన్ నంబర్",
+    "email": "ఈమెయిల్",
+    "treatment": "చికిత్స",
+    "date": "ఇష్టమైన తేదీ",
+    "time": "ఇష్టమైన సమయం",
+    "notes": "గమనికలు",
+    "closing": "దయచేసి నా అపాయింట్‌మెంట్‌ను నిర్ధారించండి. ధన్యవాదాలు.",
+    "contactIntro": "నమస్తే Derma World Skin & Hair Clinic, నేను {name}."
+  }
+}

@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eff6f1;
+  --color-brand-100: #d8eadf;
+  --color-brand-200: #b2d4c0;
+  --color-brand-300: #82b699;
+  --color-brand-400: #4f9271;
+  --color-brand-500: #2f7556;
+  --color-brand-600: #1f5f44;
+  --color-brand-700: #184d38;
+  --color-brand-800: #133e2e;
+  --color-brand-900: #0f3025;
+  --color-brand-950: #081d16;
+
+  --color-sage-50: #f6f8f3;
+  --color-sage-100: #ebf0e5;
+  --color-sage-200: #d8e1cd;
+  --color-sage-300: #bccaad;
+  --color-sage-400: #9caf89;
+  --color-sage-500: #7f946b;
+  --color-sage-600: #637654;
+
+  --color-whatsapp: #0e7a6d;
+  --color-whatsapp-dark: #0b6358;
+
+  --font-sans: var(--font-manrope), var(--font-indic, ui-sans-serif), system-ui, sans-serif;
+  --font-display: var(--font-playfair), var(--font-indic, ui-serif), Georgia, serif;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white font-sans text-gray-700 antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-brand-900;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+@utility section {
+  @apply py-16 sm:py-20;
+}
+@utility card {
+  @apply rounded-3xl border border-sage-100 bg-white p-6 shadow-[0_10px_30px_-12px_rgba(24,77,56,0.18)];
+}
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-primary {
+  @apply btn bg-brand-700 text-white hover:bg-brand-800;
+}
+@utility btn-secondary {
+  @apply btn border border-brand-700 bg-white text-brand-700 hover:bg-brand-50;
+}
+@utility btn-light {
+  @apply btn bg-white text-brand-800 hover:bg-brand-50;
+}
+@utility btn-whatsapp {
+  @apply btn bg-whatsapp text-white hover:bg-whatsapp-dark;
+}
+@utility btn-whatsapp-outline {
+  @apply btn border border-whatsapp bg-white text-whatsapp hover:bg-sage-50;
+}
+@utility eyebrow {
+  @apply mb-3 text-xs font-bold tracking-[0.18em] text-brand-600 uppercase;
+}
+@utility section-title {
+  @apply text-3xl leading-tight font-semibold sm:text-4xl;
+}
+@utility prose-clinic {
+  & p {
+    @apply mb-4 leading-relaxed;
+  }
+  & h2 {
+    @apply mt-10 mb-4 text-2xl font-semibold;
+  }
+  & ul {
+    @apply mb-4 list-disc space-y-1 pl-6;
+  }
+  & a {
+    @apply font-semibold text-brand-700 underline underline-offset-2;
+  }
+}
+@utility input {
+  @apply block min-h-11 w-full rounded-xl border border-sage-300 bg-white px-4 py-2.5 text-gray-900 placeholder:text-gray-500 focus:border-brand-600 focus:ring-2 focus:ring-brand-200 focus:outline-none aria-[invalid=true]:border-red-700;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold text-gray-900;
+}
+@utility hint {
+  @apply mt-1 text-sm text-gray-600;
+}
+@utility error-text {
+  @apply mt-1 text-sm font-medium text-red-700;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
