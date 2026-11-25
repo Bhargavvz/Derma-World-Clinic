@@ -39,7 +39,7 @@ export function ContactForm({ whatsappNumber }: { whatsappNumber: string | null 
         whatsappNumber,
         buildContactMessage(
           { name: v.name.trim(), message: v.message.trim(), phone: v.phone.trim() || undefined, email: v.email.trim() || undefined },
-          { ...enTemplates, contactIntro: tw("contactIntro"), phone: tw("phone"), email: tw("email") },
+          { ...enTemplates, contactIntro: tw.raw("contactIntro") as string, phone: tw("phone"), email: tw("email") },
         ),
       )
     : null;
@@ -109,7 +109,7 @@ export function ContactForm({ whatsappNumber }: { whatsappNumber: string | null 
     <form ref={formRef} onSubmit={onSubmit} noValidate className="card relative space-y-5">
       <h2 className="text-2xl font-semibold">{t("formTitle")}</h2>
       {Object.keys(errors).length > 0 && (
-        <p role="alert" className="rounded-2xl bg-red-50 p-3 text-sm font-medium text-red-700">
+        <p role="alert" className="rounded-[var(--radius-soft)] bg-red-50 p-3 text-sm font-medium text-red-700">
           {errors.form ? t(`errors.${errors.form}`) : t("errorSummary")}
         </p>
       )}
@@ -183,7 +183,7 @@ export function ContactForm({ whatsappNumber }: { whatsappNumber: string | null 
           </a>
         )}
       </div>
-      <p className="text-sm text-gray-600">
+      <p className="text-sm text-sage-600">
         {t("privacy")}{" "}
         <Link href="/privacy" className="font-semibold text-brand-700 underline">
           {tf("privacy")}

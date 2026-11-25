@@ -1,42 +1,76 @@
 @import "tailwindcss";
 
+/*
+ * Derma World — visual system
+ * Colours come from the clinic's own logo and signboard: the deep indigo of
+ * "DERMA" and the lagoon teal of "WORLD / SKIN & HAIR CLINIC".
+ *   brand  = indigo (headings, dark bands, primary surfaces)
+ *   lagoon = teal   (actions, links, live status)
+ *   sage   = cool porcelain/mist neutrals (kept as the name used across pages)
+ */
 @theme {
-  --color-brand-50: #eff6f1;
-  --color-brand-100: #d8eadf;
-  --color-brand-200: #b2d4c0;
-  --color-brand-300: #82b699;
-  --color-brand-400: #4f9271;
-  --color-brand-500: #2f7556;
-  --color-brand-600: #1f5f44;
-  --color-brand-700: #184d38;
-  --color-brand-800: #133e2e;
-  --color-brand-900: #0f3025;
-  --color-brand-950: #081d16;
+  --color-brand-50: #f3f2fa;
+  --color-brand-100: #e4e1f3;
+  --color-brand-200: #c9c3e6;
+  --color-brand-300: #a69ed3;
+  --color-brand-400: #7d72bb;
+  --color-brand-500: #5d51a6;
+  --color-brand-600: #4a3e94;
+  --color-brand-700: #3c317e;
+  --color-brand-800: #2e2667;
+  --color-brand-900: #221c4f;
+  --color-brand-950: #161236;
 
-  --color-sage-50: #f6f8f3;
-  --color-sage-100: #ebf0e5;
-  --color-sage-200: #d8e1cd;
-  --color-sage-300: #bccaad;
-  --color-sage-400: #9caf89;
-  --color-sage-500: #7f946b;
-  --color-sage-600: #637654;
+  --color-lagoon-50: #eef8f8;
+  --color-lagoon-100: #d3eeee;
+  --color-lagoon-200: #a7dcdd;
+  --color-lagoon-300: #6fc1c4;
+  --color-lagoon-400: #3fa2a7;
+  --color-lagoon-500: #24878d;
+  --color-lagoon-600: #1b7177;
+  --color-lagoon-700: #175b61;
+  --color-lagoon-800: #154a4f;
+
+  --color-sage-50: #f5f7f9;
+  --color-sage-100: #eaeef2;
+  --color-sage-200: #d9e0e7;
+  --color-sage-300: #bcc6d1;
+  --color-sage-400: #95a2b0;
+  --color-sage-500: #6b7887;
+  --color-sage-600: #4e5967;
+
+  --color-ink: #23262f;
 
   --color-whatsapp: #0e7a6d;
   --color-whatsapp-dark: #0b6358;
 
-  --font-sans: var(--font-manrope), var(--font-indic, ui-sans-serif), system-ui, sans-serif;
-  --font-display: var(--font-playfair), var(--font-indic, ui-serif), Georgia, serif;
+  --font-sans: var(--font-public), var(--font-indic, ui-sans-serif), system-ui, sans-serif;
+  --font-display: var(--font-spectral), var(--font-indic, ui-serif), Georgia, serif;
 
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --radius-soft: 10px;
+  --radius-frame: 14px;
 
-  @keyframes fade-up {
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-card-in: card-in 0.9s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(14px);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
+    }
+  }
+  @keyframes card-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
     }
   }
 }
@@ -47,16 +81,25 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-white font-sans text-gray-700 antialiased;
+    @apply bg-white font-sans text-[1.0625rem] leading-[1.65] text-ink antialiased;
+    font-feature-settings: "kern", "liga";
   }
   h1,
   h2,
   h3,
   h4 {
     @apply font-display text-brand-900;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    @apply bg-lagoon-200 text-brand-950;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-600;
+    @apply outline-2 outline-offset-3 outline-lagoon-500;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -73,60 +116,68 @@
 }
 
 @utility container-page {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[76rem] px-5 sm:px-8 lg:px-10;
 }
 @utility section {
-  @apply py-16 sm:py-20;
+  @apply py-18 sm:py-24;
 }
+/* Quiet surface: a border, no floating shadow. */
 @utility card {
-  @apply rounded-3xl border border-sage-100 bg-white p-6 shadow-[0_10px_30px_-12px_rgba(24,77,56,0.18)];
+  @apply rounded-[var(--radius-frame)] border border-sage-200 bg-white p-6 sm:p-7;
 }
 @utility btn {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-soft)] px-5 py-3 text-[0.9375rem] font-semibold transition-[background-color,color,border-color,box-shadow] duration-200 disabled:cursor-not-allowed disabled:opacity-60;
 }
 @utility btn-primary {
-  @apply btn bg-brand-700 text-white hover:bg-brand-800;
+  @apply btn bg-lagoon-600 text-white shadow-[inset_0_-2px_0_rgba(0,0,0,0.18)] hover:bg-lagoon-700;
 }
 @utility btn-secondary {
-  @apply btn border border-brand-700 bg-white text-brand-700 hover:bg-brand-50;
+  @apply btn border border-sage-300 bg-white text-brand-800 hover:border-brand-400 hover:bg-brand-50;
 }
 @utility btn-light {
-  @apply btn bg-white text-brand-800 hover:bg-brand-50;
+  @apply btn bg-white text-brand-900 hover:bg-brand-50;
 }
 @utility btn-whatsapp {
   @apply btn bg-whatsapp text-white hover:bg-whatsapp-dark;
 }
 @utility btn-whatsapp-outline {
-  @apply btn border border-whatsapp bg-white text-whatsapp hover:bg-sage-50;
+  @apply btn border border-sage-300 bg-white text-whatsapp hover:border-whatsapp hover:bg-lagoon-50;
 }
+/* Small sentence-case context line above a heading — used sparingly. */
 @utility eyebrow {
-  @apply mb-3 text-xs font-bold tracking-[0.18em] text-brand-600 uppercase;
+  @apply mb-3 text-[0.9375rem] font-semibold text-lagoon-600;
 }
 @utility section-title {
-  @apply text-3xl leading-tight font-semibold sm:text-4xl;
+  @apply text-[2rem] leading-[1.15] font-semibold sm:text-[2.625rem];
+}
+@utility lede {
+  @apply text-lg leading-relaxed text-sage-600 sm:text-[1.1875rem];
+}
+@utility link {
+  @apply font-semibold text-lagoon-700 underline decoration-lagoon-300 decoration-2 underline-offset-4 hover:decoration-lagoon-600;
 }
 @utility prose-clinic {
   & p {
-    @apply mb-4 leading-relaxed;
+    @apply mb-5 leading-[1.75];
   }
   & h2 {
-    @apply mt-10 mb-4 text-2xl font-semibold;
+    @apply mt-12 mb-4 text-[1.75rem] font-semibold;
   }
   & ul {
-    @apply mb-4 list-disc space-y-1 pl-6;
+    @apply mb-5 list-disc space-y-1.5 pl-6 marker:text-lagoon-500;
   }
   & a {
-    @apply font-semibold text-brand-700 underline underline-offset-2;
+    @apply link;
   }
 }
 @utility input {
-  @apply block min-h-11 w-full rounded-xl border border-sage-300 bg-white px-4 py-2.5 text-gray-900 placeholder:text-gray-500 focus:border-brand-600 focus:ring-2 focus:ring-brand-200 focus:outline-none aria-[invalid=true]:border-red-700;
+  @apply block min-h-12 w-full rounded-[var(--radius-soft)] border border-sage-300 bg-white px-4 py-3 text-ink placeholder:text-sage-500 focus:border-lagoon-500 focus:ring-3 focus:ring-lagoon-100 focus:outline-none aria-[invalid=true]:border-red-700;
 }
 @utility label {
-  @apply mb-1.5 block text-sm font-semibold text-gray-900;
+  @apply mb-1.5 block text-[0.9375rem] font-semibold text-ink;
 }
 @utility hint {
-  @apply mt-1 text-sm text-gray-600;
+  @apply mt-1 text-sm text-sage-600;
 }
 @utility error-text {
   @apply mt-1 text-sm font-medium text-red-700;

@@ -59,7 +59,7 @@ gtag('js',new Date());gtag('config','${gaId}',{allow_google_signals:false,allow_
           className="no-print fixed inset-x-0 bottom-0 z-50 border-t border-sage-200 bg-white p-4 shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.2)]"
         >
           <div className="container-page flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-ink/85">
               {t("text")}{" "}
               <Link href="/privacy" className="font-semibold text-brand-700 underline">
                 {t("privacy")}
@@ -82,7 +82,7 @@ gtag('js',new Date());gtag('config','${gaId}',{allow_google_signals:false,allow_
 
 export function CookieSettingsLink({ label }: { label: string }) {
   return (
-    <button type="button" className="underline hover:text-white" onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}>
+    <button type="button" className="underline-offset-4 hover:text-brand-900 hover:underline" onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}>
       {label}
     </button>
   );
@@ -105,7 +105,7 @@ function PrivacyNotice() {
   return (
     <section aria-label={t("label")} className="no-print fixed inset-x-0 bottom-0 z-50 border-t border-sage-200 bg-white p-4 shadow-lg">
       <div className="container-page flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-ink/85">
           {t("text")}{" "}
           <Link href="/privacy" className="font-semibold text-brand-700 underline">
             {t("privacy")}

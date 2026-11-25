@@ -62,18 +62,18 @@ export default async function TreatmentPage({ params }: Props) {
         ]}
       />
 
-      <section className="bg-gradient-to-b from-sage-100 to-sage-50">
+      <section className="bg-sage-50">
         <div className="container-page grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-16">
-          <div className="animate-fade-up">
+          <div className="animate-rise">
             <p className="eyebrow">{t(`common.groups.${tr.group}`)}</p>
             <h1 className="text-4xl leading-tight font-semibold sm:text-5xl">{name}</h1>
             <p className="mt-5 text-lg leading-relaxed">{x(tr.summary)}</p>
           </div>
           <figure>
-            <div className="relative aspect-[3/2] overflow-hidden rounded-3xl bg-sage-100 shadow-lg">
+            <div className="relative aspect-[3/2] overflow-hidden rounded-[var(--radius-frame)] bg-sage-100">
               <Image src={tr.image.path} alt={x(tr.image.alt)} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
             </div>
-            {tr.image.illustrative && <figcaption className="mt-2 text-xs text-gray-600">{t("treatments.illustrative")}</figcaption>}
+            {tr.image.illustrative && <figcaption className="mt-2 text-xs text-sage-600">{t("treatments.illustrative")}</figcaption>}
           </figure>
         </div>
       </section>
@@ -94,7 +94,7 @@ export default async function TreatmentPage({ params }: Props) {
               <h2 className="section-title">{t("treatments.concerns")}</h2>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {tr.concerns.map((c, i) => (
-                  <li key={i} className="flex gap-3 rounded-2xl bg-sage-50 p-4">
+                  <li key={i} className="flex gap-3 rounded-[var(--radius-soft)] bg-sage-50 p-4">
                     <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
                     <span>{x(c)}</span>
                   </li>
@@ -128,7 +128,7 @@ export default async function TreatmentPage({ params }: Props) {
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <div className="card bg-brand-700 text-white">
+          <div className="card bg-brand-900 text-white">
             <h2 className="text-2xl font-semibold text-white">{t("treatments.bookTitle")}</h2>
             <p className="mt-3 text-sm text-brand-50">{t("treatments.bookText")}</p>
             <div className="mt-6 flex flex-col gap-3">

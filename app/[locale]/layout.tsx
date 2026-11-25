@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { headers } from "next/headers";
-import { Manrope, Noto_Sans_Devanagari, Noto_Sans_Telugu, Playfair_Display } from "next/font/google";
+import { Noto_Sans_Devanagari, Noto_Sans_Telugu, Public_Sans, Spectral } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { htmlLang, routing, type Locale } from "@/i18n/routing";
@@ -17,8 +17,8 @@ import { LanguageSuggestion } from "@/components/site/LanguageSuggestion";
 import { JsonLd } from "@/components/site/primitives";
 import "../globals.css";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
+const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-public", display: "swap" });
+const spectral = Spectral({ subsets: ["latin"], weight: ["400", "500", "600", "700"], style: ["normal", "italic"], variable: "--font-spectral", display: "swap" });
 const telugu = Noto_Sans_Telugu({ subsets: ["telugu"], variable: "--font-indic", display: "swap", preload: false });
 const devanagari = Noto_Sans_Devanagari({ subsets: ["devanagari"], variable: "--font-indic", display: "swap", preload: false });
 
@@ -47,12 +47,12 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   const t = await getTranslations("common");
   const [clinic, treatments] = await Promise.all([getClinic(), getTreatments()]);
-  const fontClass = [manrope.variable, playfair.variable, locale === "te" ? telugu.variable : "", locale === "hi" ? devanagari.variable : ""].join(" ");
+  const fontClass = [publicSans.variable, spectral.variable, locale === "te" ? telugu.variable : "", locale === "hi" ? devanagari.variable : ""].join(" ");
 
   return (
     <html lang={htmlLang[locale as Locale]} className={fontClass}>
       <body className="flex min-h-screen flex-col">
-        <a href="#main" className="sr-only z-[60] rounded-full bg-brand-700 px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-2 focus:left-2">
+        <a href="#main" className="sr-only z-[60] rounded-lg bg-brand-900 px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-2 focus:left-2">
           {t("skipToContent")}
         </a>
         <NextIntlClientProvider>
@@ -65,7 +65,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
           <Footer />
           <WhatsAppFloat />
           <ConsentAndAnalytics gaId={flags.ga4 ? (process.env.NEXT_PUBLIC_GA4_ID ?? null) : null} nonce={nonce} />
-          <div aria-hidden="true" className="h-24 sm:h-16" />
+          <div aria-hidden="true" className="h-24 bg-sage-50 sm:h-16" />
         </NextIntlClientProvider>
         <JsonLd data={[clinicJsonLd(clinic, treatments), websiteJsonLd(clinic)]} />
       </body>

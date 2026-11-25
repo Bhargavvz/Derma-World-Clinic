@@ -1,5 +1,7 @@
 {
-  "_meta": { "reviewStatus": "reviewed" },
+  "_meta": {
+    "reviewStatus": "reviewed"
+  },
   "common": {
     "bookAppointment": "Book Appointment",
     "bookAnAppointment": "Book an Appointment",
@@ -25,7 +27,12 @@
     "chatWhatsApp": "Chat with us on WhatsApp",
     "translationNotice": "This page is not yet available in your language, so it is shown in English.",
     "language": "Language",
-    "groups": { "skin": "Skin", "hair": "Hair", "nails": "Nails", "cosmetology": "Cosmetology" }
+    "groups": {
+      "skin": "Skin",
+      "hair": "Hair",
+      "nails": "Nails",
+      "cosmetology": "Cosmetology"
+    }
   },
   "nav": {
     "primary": "Primary",
@@ -39,7 +46,9 @@
     "closeMenu": "Close menu",
     "menu": "Menu"
   },
-  "topbar": { "hours": "Mon–Sat 10 AM – 10 PM · Sunday by appointment" },
+  "topbar": {
+    "hours": "Mon–Sat 10 AM – 10 PM · Sunday by appointment"
+  },
   "footer": {
     "tagline": "Consultations and treatment for skin and hair concerns in Moula Ali, Hyderabad.",
     "explore": "Explore",
@@ -339,5 +348,24 @@
     "title": "Something went wrong",
     "text": "Sorry, this page couldn't be loaded. Please try again, or call the clinic.",
     "retry": "Try again"
+  },
+  "status": {
+    "open": "Open now, until {time}",
+    "openAppt": "Open by appointment, until {time}",
+    "opensToday": "Closed now. Opens today at {time}",
+    "opensTomorrow": "Closed now. Opens tomorrow at {time}",
+    "opensOn": "Closed now. Opens {day} at {time}"
+  },
+  "hero": {
+    "cardTitle": "Visit the clinic",
+    "doctorLine": "Consultations with",
+    "directions": "Directions",
+    "servicesTitle": "What the clinic treats",
+    "servicesText": "Each treatment starts with a consultation. Choose a concern to read what the doctor assesses and what to expect.",
+    "credentials": "Qualifications",
+    "position": "Current position",
+    "memberships": "Memberships",
+    "insideText": "Reception, waiting area and the procedure room, above Lucid Diagnostics in Moula Ali.",
+    "ctaEyebrow": "Ready when you are"
   }
 }

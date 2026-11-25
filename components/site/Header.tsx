@@ -24,8 +24,8 @@ export async function TopBar() {
   const t = await getTranslations();
   const primary = c.phones[0]!;
   return (
-    <div className="hidden bg-brand-800 text-sm text-brand-50 lg:block">
-      <div className="container-page flex items-center justify-between gap-6 py-2">
+    <div className="hidden bg-brand-950 text-[0.8125rem] text-brand-100 lg:block">
+      <div className="container-page flex items-center justify-between gap-6 py-2.5 whitespace-nowrap">
         {c.mapsPlaceUrl ? (
           <TrackedLink event="map_open" href={c.mapsPlaceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white">
             <MapPin className="h-4 w-4" aria-hidden="true" />
@@ -36,7 +36,7 @@ export async function TopBar() {
           <span>{c.address.lines[0]}</span>
         )}
         <div className="flex items-center gap-6">
-          <span className="inline-flex items-center gap-2">
+          <span className="hidden items-center gap-2 xl:inline-flex">
             <Clock className="h-4 w-4" aria-hidden="true" />
             {t("topbar.hours")}
           </span>
@@ -57,25 +57,26 @@ export async function Header() {
   const primary = c.phones[0]!;
   const items = navItems.map((n) => ({ href: n.href, label: t(`nav.${n.key}`) }));
   return (
-    <header className="no-print sticky top-0 z-40 border-b border-sage-100 bg-white/95 backdrop-blur">
-      <div className="container-page flex h-18 items-center justify-between gap-4 py-3">
+    <header className="no-print sticky top-0 z-40 border-b border-sage-200/80 bg-white/90 backdrop-blur-md supports-[backdrop-filter]:bg-white/80">
+      <div className="container-page flex h-20 items-center justify-between gap-4">
         <Link href="/" aria-label={t("common.homeLink")} className="shrink-0">
-          <Image src="/images/brand/logo-navbar.webp" alt={t("common.navLogoAlt")} width={733} height={112} priority className="h-9 w-auto sm:h-10" />
+          <Image src="/images/brand/logo-navbar.webp" alt={t("common.navLogoAlt")} width={733} height={112} priority className="h-9 w-auto sm:h-11" />
         </Link>
         <nav aria-label={t("nav.primary")} className="hidden lg:block">
           <NavLinks items={items} />
         </nav>
         <div className="flex items-center gap-2">
-          <div className="hidden xl:block">
+          <div className="hidden 2xl:block">
             <LanguageSwitcher />
           </div>
           <TrackedLink
             event="phone_click"
             href={`tel:${primary.tel}`}
             aria-label={t("common.callClinicOn", { phone: primary.display })}
-            className="btn-secondary hidden !px-3 sm:inline-flex"
+            className="hidden min-h-11 items-center gap-2 px-3 text-[0.9375rem] font-semibold text-brand-900 hover:text-lagoon-700 sm:inline-flex"
           >
-            <Phone className="h-4 w-4" aria-hidden="true" />
+            <Phone className="h-4 w-4 text-lagoon-600" aria-hidden="true" />
+            <span className="hidden 2xl:inline">{primary.display}</span>
           </TrackedLink>
           <Link href="/appointment" className="btn-primary hidden sm:inline-flex">
             {t("common.bookAppointment")}

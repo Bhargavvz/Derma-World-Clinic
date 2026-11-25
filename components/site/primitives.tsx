@@ -24,13 +24,12 @@ export function SrOnly({ children }: { children: ReactNode }) {
 
 export function PageHero({ eyebrow, title, intro, children }: { eyebrow?: string; title: string; intro?: string; children?: ReactNode }) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-sage-100 to-sage-50">
-      <div aria-hidden="true" className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-100 opacity-70 blur-3xl" />
-      <div className="container-page relative py-14 sm:py-20">
-        <div className="max-w-3xl animate-fade-up">
+    <section className="border-b border-sage-200 bg-sage-50">
+      <div className="container-page pt-10 pb-14 sm:pt-14 sm:pb-20">
+        <div className="max-w-3xl animate-rise">
           {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-          <h1 className="text-4xl leading-tight font-semibold sm:text-5xl">{title}</h1>
-          {intro && <p className="mt-5 text-lg leading-relaxed text-gray-700">{intro}</p>}
+          <h1 className="text-[2.5rem] leading-[1.08] font-semibold sm:text-[3.5rem]">{title}</h1>
+          {intro && <p className="lede mt-6 max-w-2xl">{intro}</p>}
           {children}
         </div>
       </div>
@@ -40,17 +39,18 @@ export function PageHero({ eyebrow, title, intro, children }: { eyebrow?: string
 
 export function Breadcrumbs({ items, label = "Breadcrumb" }: { items: { name: string; href?: string }[]; label?: string }) {
   return (
-    <nav aria-label={label} className="container-page pt-4 text-sm text-gray-600">
+    <div className="bg-sage-50">
+    <nav aria-label={label} className="container-page pt-6 text-sm text-sage-600">
       <ol className="flex flex-wrap items-center gap-1.5">
         {items.map((it, i) => (
           <li key={i} className="flex items-center gap-1.5">
-            {i > 0 && <span aria-hidden="true">›</span>}
+            {i > 0 && <span aria-hidden="true" className="text-sage-400">/</span>}
             {it.href ? (
-              <Link href={it.href} className="hover:text-brand-700 hover:underline">
+              <Link href={it.href} className="underline-offset-4 hover:text-brand-900 hover:underline">
                 {it.name}
               </Link>
             ) : (
-              <span aria-current="page" className="font-medium text-gray-800">
+              <span aria-current="page" className="font-medium text-ink">
                 {it.name}
               </span>
             )}
@@ -58,6 +58,7 @@ export function Breadcrumbs({ items, label = "Breadcrumb" }: { items: { name: st
         ))}
       </ol>
     </nav>
+    </div>
   );
 }
 
@@ -65,8 +66,8 @@ export function InfoNote({ children, tone = "info" }: { children: ReactNode; ton
   return (
     <div
       className={cn(
-        "rounded-2xl border p-4 text-sm leading-relaxed",
-        tone === "warn" ? "border-amber-300 bg-amber-50 text-amber-800" : "border-sage-200 bg-sage-50 text-gray-700",
+        "rounded-[var(--radius-soft)] border-l-4 p-4 text-[0.9375rem] leading-relaxed",
+        tone === "warn" ? "border-amber-500 bg-amber-50 text-amber-900" : "border-lagoon-400 bg-lagoon-50 text-ink/85",
       )}
     >
       {children}
@@ -84,7 +85,7 @@ export function RichText({ text }: { text: string }) {
   while ((m = re.exec(text))) {
     if (m.index > last) parts.push(text.slice(last, m.index));
     parts.push(
-      <Link key={i++} href={m[2]!} className="font-semibold text-brand-700 underline underline-offset-2">
+      <Link key={i++} href={m[2]!} className="link">
         {m[1]}
       </Link>,
     );

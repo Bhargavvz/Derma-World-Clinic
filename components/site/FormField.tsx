@@ -30,7 +30,7 @@ export function FormField({
             *
           </span>
         ) : optionalLabel ? (
-          <span className="font-normal text-gray-600"> ({optionalLabel})</span>
+          <span className="font-normal text-sage-600"> ({optionalLabel})</span>
         ) : null}
         {required && requiredLabel && <span className="sr-only"> ({requiredLabel})</span>}
       </label>

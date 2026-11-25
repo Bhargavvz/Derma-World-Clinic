@@ -30,7 +30,7 @@ export function GalleryGrid({ photos, eagerCount = 3 }: { photos: GalleryPhoto[]
               <button
                 type="button"
                 onClick={() => setIndex(i)}
-                className="group block w-full overflow-hidden rounded-3xl bg-sage-100 focus-visible:outline-2"
+                className="group block w-full overflow-hidden rounded-[var(--radius-frame)] bg-sage-100 focus-visible:outline-2"
               >
                 <span className="relative block aspect-[9/16]">
                   <Image
@@ -44,7 +44,7 @@ export function GalleryGrid({ photos, eagerCount = 3 }: { photos: GalleryPhoto[]
                   />
                 </span>
               </button>
-              <figcaption className="mt-3 text-center text-sm font-semibold text-gray-800">{p.caption}</figcaption>
+              <figcaption className="mt-3 text-center text-sm font-semibold text-ink">{p.caption}</figcaption>
             </figure>
           </li>
         ))}

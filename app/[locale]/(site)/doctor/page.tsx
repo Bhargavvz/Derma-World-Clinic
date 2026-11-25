@@ -53,10 +53,9 @@ export default async function DoctorPage({ params }: Props) {
       <TranslationNotice show={!idx.includes(locale)} />
       <Breadcrumbs items={[{ name: t("common.home"), href: "/" }, { name: t("doctor.breadcrumb") }]} />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-sage-100 to-sage-50">
+      <section className="relative overflow-hidden bg-sage-50">
         <div className="container-page grid items-center gap-12 py-14 lg:grid-cols-[2fr_3fr]">
           <div className="relative mx-auto w-full max-w-sm">
-            <div aria-hidden="true" className="absolute -inset-4 -rotate-3 rounded-[2.5rem] bg-sage-200" />
             <Image
               src={d.photo.path}
               alt={tr(d.photo.alt)}
@@ -64,10 +63,10 @@ export default async function DoctorPage({ params }: Props) {
               height={d.photo.height}
               priority
               sizes="(min-width: 1024px) 380px, 80vw"
-              className="relative h-auto w-full rounded-[2rem] shadow-xl"
+              className="relative h-auto w-full rounded-[var(--radius-frame)]"
             />
           </div>
-          <div className="animate-fade-up">
+          <div className="animate-rise">
             <p className="eyebrow">{t("doctor.eyebrow")}</p>
             <h1 className="text-4xl font-semibold sm:text-5xl">{d.name}</h1>
             <p className="mt-3 inline-flex items-center gap-2 font-semibold text-brand-700">
@@ -75,7 +74,7 @@ export default async function DoctorPage({ params }: Props) {
               <BadgeCheck className="h-5 w-5" aria-hidden="true" />
               <span className="sr-only">({t("doctor.verified")})</span>
             </p>
-            <p className="text-gray-600">{tr(d.role)}</p>
+            <p className="text-sage-600">{tr(d.role)}</p>
             {d.introduction.map((p, i) => (
               <p key={i} className="mt-4 leading-relaxed">
                 {tr(p)}
@@ -159,9 +158,9 @@ export default async function DoctorPage({ params }: Props) {
                 width={d.conferencePhoto.width}
                 height={d.conferencePhoto.height}
                 sizes="(min-width: 640px) 576px, 100vw"
-                className="h-auto w-full rounded-3xl shadow-lg"
+                className="h-auto w-full rounded-[var(--radius-frame)]"
               />
-              <figcaption className="mt-3 text-center text-sm text-gray-700">{tr(d.conferencePhoto.caption)}</figcaption>
+              <figcaption className="mt-3 text-center text-sm text-ink/85">{tr(d.conferencePhoto.caption)}</figcaption>
             </figure>
           </div>
         </section>

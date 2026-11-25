@@ -34,7 +34,7 @@ export default async function ContactPage({ params }: Props) {
 
   const Box = ({ icon: Icon, title, children }: { icon: typeof MapPin; title: string; children: React.ReactNode }) => (
     <div className="card">
-      <h2 className="flex items-center gap-2 font-sans text-lg font-bold text-gray-900">
+      <h2 className="flex items-center gap-2 font-sans text-lg font-bold text-ink">
         <Icon className="h-5 w-5 text-brand-600" aria-hidden="true" />
         {title}
       </h2>

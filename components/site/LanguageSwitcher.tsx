@@ -26,14 +26,14 @@ export function LanguageSwitcher({ inverted = false }: { inverted?: boolean }) {
             if (l !== current) track("language_change", { language: l });
           }}
           className={cn(
-            "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-2 font-semibold",
+            "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-soft)] px-2 font-semibold",
             l === current
               ? inverted
                 ? "bg-white text-brand-800"
-                : "bg-brand-50 text-brand-800"
+                : "bg-white text-brand-900 ring-1 ring-sage-200"
               : inverted
                 ? "text-brand-100 hover:text-white"
-                : "text-gray-600 hover:text-brand-700",
+                : "text-sage-600 hover:text-brand-700",
           )}
         >
           {localeNames[l]}

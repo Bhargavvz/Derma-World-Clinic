@@ -1,5 +1,8 @@
 {
-  "_meta": { "reviewStatus": "draft", "note": "Machine-drafted. Needs review by a qualified Hindi speaker before marking reviewed." },
+  "_meta": {
+    "reviewStatus": "draft",
+    "note": "Machine-drafted. Needs review by a qualified Hindi speaker before marking reviewed."
+  },
   "common": {
     "bookAppointment": "अपॉइंटमेंट बुक करें",
     "bookAnAppointment": "अपॉइंटमेंट बुक करें",
@@ -26,9 +29,23 @@
     "closeMenu": "मेनू बंद करें",
     "menu": "मेनू"
   },
-  "footer": { "explore": "देखें", "treatments": "उपचार", "visitUs": "हमसे मिलें", "privacy": "गोपनीयता नीति", "cookieSettings": "कुकी सेटिंग्स" },
-  "consent": { "accept": "एनालिटिक्स स्वीकार करें", "reject": "अस्वीकार करें", "privacy": "गोपनीयता नीति" },
-  "langSuggest": { "text": "यह वेबसाइट {language} में भी उपलब्ध है।", "switch": "बदलें", "dismiss": "रहने दें" },
+  "footer": {
+    "explore": "देखें",
+    "treatments": "उपचार",
+    "visitUs": "हमसे मिलें",
+    "privacy": "गोपनीयता नीति",
+    "cookieSettings": "कुकी सेटिंग्स"
+  },
+  "consent": {
+    "accept": "एनालिटिक्स स्वीकार करें",
+    "reject": "अस्वीकार करें",
+    "privacy": "गोपनीयता नीति"
+  },
+  "langSuggest": {
+    "text": "यह वेबसाइट {language} में भी उपलब्ध है।",
+    "switch": "बदलें",
+    "dismiss": "रहने दें"
+  },
   "whatsapp": {
     "greeting": "नमस्ते Derma World Skin & Hair Clinic,",
     "bookIntro": "मैं एक अपॉइंटमेंट बुक करना चाहता/चाहती हूँ।",
@@ -41,5 +58,24 @@
     "notes": "नोट्स",
     "closing": "कृपया मेरा अपॉइंटमेंट कन्फ़र्म करें। धन्यवाद।",
     "contactIntro": "नमस्ते Derma World Skin & Hair Clinic, मैं {name} हूँ।"
+  },
+  "status": {
+    "open": "अभी खुला है, {time} तक",
+    "openAppt": "अपॉइंटमेंट से खुला है, {time} तक",
+    "opensToday": "अभी बंद है। आज {time} बजे खुलेगा",
+    "opensTomorrow": "अभी बंद है। कल {time} बजे खुलेगा",
+    "opensOn": "अभी बंद है। {day} को {time} बजे खुलेगा"
+  },
+  "hero": {
+    "cardTitle": "क्लिनिक आइए",
+    "doctorLine": "परामर्श",
+    "directions": "रास्ता देखें",
+    "servicesTitle": "क्लिनिक में होने वाले इलाज",
+    "servicesText": "हर इलाज परामर्श से शुरू होता है। डॉक्टर क्या जाँचते हैं, यह पढ़ने के लिए कोई समस्या चुनें।",
+    "credentials": "योग्यताएँ",
+    "position": "वर्तमान पद",
+    "memberships": "सदस्यताएँ",
+    "insideText": "मौला अली में लूसिड डायग्नोस्टिक्स के ऊपर रिसेप्शन, प्रतीक्षा क्षेत्र और प्रोसीजर रूम।",
+    "ctaEyebrow": "जब आप तैयार हों"
   }
 }

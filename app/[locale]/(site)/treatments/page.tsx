@@ -75,7 +75,7 @@ export default async function TreatmentsPage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm text-gray-600">{t("treatments.proceduresNote")}</p>
+          <p className="mt-6 text-sm text-sage-600">{t("treatments.proceduresNote")}</p>
           <div className="mt-8">
             <InfoNote>{t("treatments.disclaimer")}</InfoNote>
           </div>

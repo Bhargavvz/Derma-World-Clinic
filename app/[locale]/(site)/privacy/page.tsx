@@ -123,7 +123,7 @@ export default async function PrivacyPage({ params }: Props) {
           <h2>Changes to this policy</h2>
           <p>We may update this policy. The date at the top shows when it last changed.</p>
 
-          <p className="mt-10 rounded-2xl bg-sage-50 p-4 text-sm">
+          <p className="mt-10 rounded-[var(--radius-soft)] bg-sage-50 p-4 text-sm">
             Information on this website is general and is not a substitute for a medical consultation. This website does not provide medical advice. See{" "}
             <Link href="/contact">contact details</Link>.
           </p>

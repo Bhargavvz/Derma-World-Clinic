@@ -20,7 +20,7 @@ export async function ClinicAddress({ withName = false, className }: { withName?
   const c = await getClinic();
   return (
     <address className={cn("not-italic leading-relaxed", className)}>
-      {withName && <strong className="block text-gray-900">{c.name}</strong>}
+      {withName && <strong className="block text-ink">{c.name}</strong>}
       {c.address.lines.map((l) => (
         <span key={l} className="block">
           {l}
@@ -51,7 +51,7 @@ export async function ClinicPhoneNumbers({ size = "md", inverted = false }: { si
             <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
             {p.display}
           </TrackedLink>
-          <span className={cn("ml-6 block text-xs", inverted ? "text-brand-100" : "text-gray-600")}>{L(p.label, locale, c.reviewStatus)}</span>
+          <span className={cn("ml-6 block text-xs", inverted ? "text-brand-100" : "text-sage-600")}>{L(p.label, locale, c.reviewStatus)}</span>
         </li>
       ))}
     </ul>
@@ -66,15 +66,15 @@ export async function OpeningHoursList({ inverted = false, showSundayNote = fals
       <dl className="space-y-2">
         {c.openingHours.map((h, i) => (
           <div key={i}>
-            <dt className={cn("font-semibold", inverted ? "text-white" : "text-gray-900")}>{L(h.days, locale, c.reviewStatus)}</dt>
-            <dd className={inverted ? "text-brand-100" : "text-gray-700"}>
+            <dt className={cn("font-semibold", inverted ? "text-white" : "text-ink")}>{L(h.days, locale, c.reviewStatus)}</dt>
+            <dd className={inverted ? "text-brand-100" : "text-ink/85"}>
               {L(h.display, locale, c.reviewStatus)}
               {h.note && <span className="block text-sm">({L(h.note, locale, c.reviewStatus)})</span>}
             </dd>
           </div>
         ))}
       </dl>
-      {showSundayNote && <p className={cn("mt-3 text-sm", inverted ? "text-brand-100" : "text-gray-600")}>{L(c.sundayNote, locale, c.reviewStatus)}</p>}
+      {showSundayNote && <p className={cn("mt-3 text-sm", inverted ? "text-brand-100" : "text-sage-600")}>{L(c.sundayNote, locale, c.reviewStatus)}</p>}
     </div>
   );
 }

@@ -65,15 +65,15 @@ export default async function AppointmentPage({ params, searchParams }: Props) {
             <div className="card space-y-6">
               <h2 className="text-xl font-semibold">{t("booking.sidebarTitle")}</h2>
               <div>
-                <h3 className="font-sans text-sm font-bold text-gray-900">{t("common.address")}</h3>
+                <h3 className="font-sans text-sm font-bold text-ink">{t("common.address")}</h3>
                 <ClinicAddress withName className="mt-2 text-sm" />
               </div>
               <div>
-                <h3 className="mb-2 font-sans text-sm font-bold text-gray-900">{t("common.openingHours")}</h3>
+                <h3 className="mb-2 font-sans text-sm font-bold text-ink">{t("common.openingHours")}</h3>
                 <OpeningHoursList showSundayNote />
               </div>
               <div>
-                <h3 className="mb-2 font-sans text-sm font-bold text-gray-900">{t("common.phone")}</h3>
+                <h3 className="mb-2 font-sans text-sm font-bold text-ink">{t("common.phone")}</h3>
                 <ClinicPhoneNumbers />
               </div>
             </div>

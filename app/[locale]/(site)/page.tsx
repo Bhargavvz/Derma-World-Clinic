@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { CalendarCheck, Clock, MapPin, Phone, ShieldCheck, Stethoscope, Syringe } from "lucide-react";
+import { ArrowRight, CalendarCheck, Clock, MapPin, Phone, ShieldCheck, Stethoscope, Syringe } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getClinic, getDoctor, getGallery, getHomeFaqs, getTreatments } from "@/lib/content/loaders";
@@ -9,9 +9,10 @@ import { heroClinicImage } from "@/lib/content/seed";
 import { L, isReviewed } from "@/lib/i18n/localize";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { faqJsonLd } from "@/lib/seo/jsonld";
-import { CtaBanner, FaqList, TranslationNotice, TreatmentCard } from "@/components/site/blocks";
-import { ClinicAddress, ClinicPhoneNumbers, OpeningHoursList, WhatsAppLink } from "@/components/site/clinic";
+import { CtaBanner, FaqList, TranslationNotice } from "@/components/site/blocks";
+import { ClinicAddress, ClinicPhoneNumbers, directionsUrl, OpeningHoursList, WhatsAppLink } from "@/components/site/clinic";
 import { MapEmbed } from "@/components/site/MapEmbed";
+import { OpenStatus } from "@/components/site/OpenStatus";
 import { JsonLd } from "@/components/site/primitives";
 import { TrackedLink } from "@/components/site/TrackedLink";
 
@@ -29,6 +30,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({ locale, path: "/", title: t("metaTitle"), description: t("metaDescription"), indexableLocales: await reviewedLocales() });
 }
 
+/** The "S" swoosh of the clinic's logo, drawn as a single line. */
+function Swoosh({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 600 600" fill="none" aria-hidden="true" className={className}>
+      <path d="M470 70C330 20 150 70 150 190c0 150 320 120 320 260 0 110-170 150-330 90" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M500 110C380 60 210 95 205 190c-6 125 310 110 305 250" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity=".55" />
+    </svg>
+  );
+}
+
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -43,11 +54,12 @@ export default async function HomePage({ params }: Props) {
   ]);
   const primary = clinic.phones[0]!;
   const tr = (x: Parameters<typeof L>[0], r = clinic.reviewStatus) => L(x, locale, r);
+  const dr = (x: Parameters<typeof L>[0]) => L(x, locale, doctor.reviewStatus);
   const groups = [
     { title: t("home.groupSkin"), text: t("home.groupSkinText"), items: treatments.filter((x) => x.group === "skin") },
     { title: t("home.groupHair"), text: t("home.groupHairText"), items: treatments.filter((x) => x.group === "hair") },
     { title: t("home.groupCosmetic"), text: t("home.groupCosmeticText"), items: treatments.filter((x) => x.group === "cosmetology" || x.group === "nails") },
-  ];
+  ].filter((g) => g.items.length);
   const faqItems = faqs.map((f) => ({ question: L(f.question, locale, f.reviewStatus), answer: L(f.answer, locale, f.reviewStatus) }));
   const expect = [
     { icon: ShieldCheck, title: t("home.expect1"), text: t("home.expect1Text") },
@@ -55,113 +67,107 @@ export default async function HomePage({ params }: Props) {
     { icon: Syringe, title: t("home.expect3"), text: t("home.expect3Text") },
     { icon: Clock, title: t("home.expect4"), text: t("home.expect4Text") },
   ];
+  const hours = clinic.openingHours.map((h) => ({ schemaDays: h.schemaDays, sessions: h.sessions, byAppointment: !!h.note }));
 
   return (
     <>
       <TranslationNotice show={!indexable.includes(locale)} />
 
-      {/* 1. Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sage-50 to-white">
-        <div aria-hidden="true" className="absolute -top-32 -left-24 h-96 w-96 rounded-full bg-brand-100 opacity-60 blur-3xl" />
-        <div className="container-page relative grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-2 lg:py-20">
-          <div className="animate-fade-up">
-            <p className="inline-flex rounded-full bg-brand-50 px-4 py-1.5 text-sm font-semibold text-brand-700">{t("home.pill")}</p>
-            <h1 className="mt-6">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-brand-900 text-white">
+        <Swoosh className="pointer-events-none absolute hidden lg:block -top-24 right-[-12rem] h-[44rem] w-[44rem] text-lagoon-400/35 lg:right-[-6rem]" />
+        <div className="container-page relative grid gap-14 pt-14 pb-20 sm:pt-20 lg:grid-cols-[1.08fr_1fr] lg:gap-16 lg:pt-24 lg:pb-28">
+          <div className="animate-rise lg:pt-6">
+            <p className="text-[0.9375rem] font-medium text-lagoon-300">{t("home.pill")}</p>
+            <h1 className="mt-5 text-[2.75rem] leading-[1.02] font-semibold text-white sm:text-[4rem] lg:text-[4.75rem]">
               <span className="sr-only">{t("home.h1Sr")} </span>
-              <Image
-                src="/images/brand/logo-hero-1100.webp"
-                alt=""
-                aria-hidden="true"
-                width={1186}
-                height={272}
-                priority
-                sizes="(min-width: 1024px) 560px, 90vw"
-                className="h-auto w-full max-w-xl"
-              />
-              <span className="mt-5 block text-3xl leading-tight font-semibold text-brand-800 sm:text-4xl">{t("home.h1")}</span>
+              {t("home.h1")}
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed">{t("home.intro")}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/appointment" className="btn-primary">
-                <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-brand-100 sm:text-[1.25rem]">{t("home.intro")}</p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link href="/appointment" className="btn bg-lagoon-400 text-brand-950 hover:bg-lagoon-300">
+                <CalendarCheck className="h-[1.125rem] w-[1.125rem]" aria-hidden="true" />
                 {t("common.bookAnAppointment")}
               </Link>
-              <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="btn-secondary">
+              <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="btn border border-white/30 text-white hover:border-white/60 hover:bg-white/5">
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 {t("common.call", { phone: primary.display })}
               </TrackedLink>
-              <WhatsAppLink variant="outline" />
             </div>
-            <p className="mt-5 text-sm text-gray-600">{tr(clinic.shortHours)}</p>
+
+            <Link href="/doctor" className="group mt-12 flex max-w-md items-center gap-4 border-t border-white/15 pt-6">
+              <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-lagoon-400/60">
+                <Image src={doctor.photo.path} alt="" fill sizes="56px" className="object-cover object-top" />
+              </span>
+              <span>
+                <span className="block text-sm text-brand-200">{t("hero.doctorLine")}</span>
+                <span className="block font-display text-lg font-semibold text-white group-hover:text-lagoon-200">{doctor.name}</span>
+                <span className="block text-sm text-brand-200">{doctor.qualificationsShort}</span>
+              </span>
+            </Link>
           </div>
-          <div className="relative mx-auto w-full max-w-md">
-            <div aria-hidden="true" className="absolute -inset-4 rotate-3 rounded-[2.5rem] bg-sage-200" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-xl">
-              <Image
-                src={heroClinicImage.path}
-                alt={L(heroClinicImage.alt, locale)}
-                fill
-                priority
-                fetchPriority="high"
-                sizes="(min-width: 1024px) 448px, 90vw"
-                className="object-cover"
-              />
+
+          <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-frame)] bg-brand-800 lg:ml-10">
+              <Image src={heroClinicImage.path} alt={L(heroClinicImage.alt, locale)} fill priority fetchPriority="high" sizes="(min-width: 1024px) 520px, 92vw" className="object-cover" />
             </div>
-            <div className="absolute -bottom-6 left-4 rounded-2xl bg-white p-4 shadow-lg sm:-left-6">
-              <p className="font-display text-lg font-semibold text-brand-900">{doctor.name}</p>
-              <p className="text-sm text-gray-600">{doctor.qualificationsShort}</p>
+            {/* Clinic card, modelled on the visiting card */}
+            <div className="relative -mt-24 mr-4 ml-4 animate-card-in rounded-[var(--radius-frame)] bg-white p-6 text-ink shadow-[0_24px_60px_-20px_rgba(22,18,54,0.55)] sm:mr-auto sm:ml-0 sm:max-w-sm lg:absolute lg:-bottom-10 lg:-left-6 lg:mt-0">
+              <p className="font-display text-xl font-semibold text-brand-900">{t("hero.cardTitle")}</p>
+              <div className="mt-3">
+                <OpenStatus hours={hours} />
+              </div>
+              <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink/80">
+                {clinic.address.lines[0]}
+                <br />
+                {clinic.address.lines[1]}
+              </p>
+              <p className="mt-2 text-sm text-sage-600">{tr(clinic.shortHours)}</p>
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 border-t border-sage-200 pt-4 text-[0.9375rem] font-semibold">
+                <TrackedLink event="directions_click" href={directionsUrl(clinic)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-lagoon-700 hover:text-lagoon-800">
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                  {t("hero.directions")}
+                  <span className="sr-only"> ({t("common.opensNewTab")})</span>
+                </TrackedLink>
+                <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="inline-flex min-h-11 items-center gap-1.5 text-brand-800 hover:text-lagoon-700">
+                  <Phone className="h-4 w-4" aria-hidden="true" />
+                  {primary.display}
+                </TrackedLink>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Clinic at a glance */}
-      <section className="container-page relative z-10 mt-10">
-        <div className="card grid gap-6 sm:grid-cols-3">
-          <div className="flex gap-3">
-            <MapPin className="mt-1 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
-            <div>
-              <h2 className="font-sans text-sm font-bold text-gray-900">{t("home.glanceLocation")}</h2>
-              <p className="mt-1 text-sm">{t("home.glanceLocationText")}</p>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <Clock className="mt-1 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
-            <div>
-              <h2 className="font-sans text-sm font-bold text-gray-900">{t("home.glanceHours")}</h2>
-              <p className="mt-1 text-sm">{t("home.glanceHoursText")}</p>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <Phone className="mt-1 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
-            <div>
-              <h2 className="font-sans text-sm font-bold text-gray-900">{t("home.glanceCall")}</h2>
-              <TrackedLink event="phone_click" href={`tel:${primary.tel}`} className="mt-1 inline-flex min-h-11 items-center font-semibold text-brand-700">
-                {primary.display}
-              </TrackedLink>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. About */}
+      {/* Treatments directory */}
       <section className="section">
-        <div className="container-page">
-          <div className="max-w-3xl">
-            <p className="eyebrow">{t("home.aboutEyebrow")}</p>
-            <h2 className="section-title">{t("home.aboutTitle")}</h2>
-            <p className="mt-4 text-lg leading-relaxed">{t("home.aboutText")}</p>
+        <div className="container-page grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <h2 className="section-title">{t("hero.servicesTitle")}</h2>
+            <p className="lede mt-5">{t("hero.servicesText")}</p>
+            <Link href="/treatments" className="link mt-7 inline-flex items-center gap-1.5">
+              {t("home.viewAll", { count: treatments.length })}
+            </Link>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="space-y-14">
             {groups.map((g) => (
-              <div key={g.title} className="card">
-                <h3 className="text-xl font-semibold">{g.title}</h3>
-                <p className="mt-2 text-sm">{g.text}</p>
-                <ul className="mt-4 space-y-1">
+              <div key={g.title}>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-brand-900 pb-3">
+                  <h3 className="text-[1.625rem] font-semibold">{g.title}</h3>
+                  <p className="text-[0.9375rem] text-sage-600">{g.text}</p>
+                </div>
+                <ul>
                   {g.items.map((x) => (
-                    <li key={x.slug}>
-                      <Link href={`/treatments/${x.slug}`} className="inline-flex min-h-9 items-center text-sm font-semibold text-brand-700 hover:underline">
-                        {L(x.name, locale, x.reviewStatus)}
+                    <li key={x.slug} className="border-b border-sage-200">
+                      <Link href={`/treatments/${x.slug}`} className="group grid grid-cols-[4.5rem_1fr_auto] items-center gap-5 py-5 sm:grid-cols-[5.5rem_1fr_auto]">
+                        <span className="relative aspect-square overflow-hidden rounded-[var(--radius-soft)] bg-sage-100">
+                          <Image src={x.image.path} alt="" fill sizes="88px" className="object-cover" />
+                        </span>
+                        <span>
+                          <span className="block font-display text-xl font-semibold text-brand-900 group-hover:text-lagoon-700 sm:text-[1.375rem]">{L(x.name, locale, x.reviewStatus)}</span>
+                          <span className="mt-1 line-clamp-2 block text-[0.9375rem] leading-relaxed text-ink/75">{L(x.summary, locale, x.reviewStatus)}</span>
+                        </span>
+                        <ArrowRight className="h-5 w-5 text-sage-400 transition-[transform,color] duration-300 group-hover:translate-x-1 group-hover:text-lagoon-600" aria-hidden="true" />
                       </Link>
                     </li>
                   ))}
@@ -172,52 +178,52 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* 4. Treatments */}
+      {/* Doctor */}
       <section className="section bg-sage-50">
-        <div className="container-page">
-          <div className="max-w-3xl">
-            <p className="eyebrow">{t("home.treatmentsEyebrow")}</p>
-            <h2 className="section-title">{t("home.treatmentsTitle")}</h2>
-            <p className="mt-4 text-lg">{t("home.treatmentsText")}</p>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {treatments.slice(0, 6).map((x) => (
-              <TreatmentCard key={x.slug} treatment={x} />
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link href="/treatments" className="btn-secondary">
-              {t("home.viewAll", { count: treatments.length })}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Meet the doctor */}
-      <section className="section">
-        <div className="container-page grid items-center gap-12 lg:grid-cols-[2fr_3fr]">
-          <div className="relative mx-auto w-full max-w-sm">
-            <div aria-hidden="true" className="absolute -inset-4 -rotate-3 rounded-[2.5rem] bg-sage-200" />
+        <div className="container-page grid items-start gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
+          <figure className="mx-auto w-full max-w-md">
             <Image
               src={doctor.photo.path}
-              alt={L(doctor.photo.alt, locale, doctor.reviewStatus)}
+              alt={dr(doctor.photo.alt)}
               width={doctor.photo.width}
               height={doctor.photo.height}
-              sizes="(min-width: 1024px) 380px, 80vw"
-              className="relative h-auto w-full rounded-[2rem] shadow-xl"
+              sizes="(min-width: 1024px) 440px, 88vw"
+              className="h-auto w-full rounded-[var(--radius-frame)]"
             />
-          </div>
+          </figure>
           <div>
             <p className="eyebrow">{t("home.doctorEyebrow")}</p>
             <h2 className="section-title">{doctor.name}</h2>
-            <p className="mt-2 font-semibold text-brand-700">{doctor.qualificationsShort}</p>
-            <p className="text-gray-600">{L(doctor.role, locale, doctor.reviewStatus)}</p>
-            <p className="mt-5 leading-relaxed">{L(doctor.introduction[0], locale, doctor.reviewStatus)}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <p className="mt-3 text-lg text-sage-600">{dr(doctor.role)}</p>
+            <p className="mt-7 max-w-2xl text-lg leading-[1.75]">{dr(doctor.introduction[0]!)}</p>
+
+            <dl className="mt-10 grid gap-x-10 gap-y-8 border-t border-sage-300 pt-8 sm:grid-cols-2">
+              {doctor.qualifications.length > 0 && (
+                <div>
+                  <dt className="font-display text-lg font-semibold text-brand-900">{t("hero.credentials")}</dt>
+                  {doctor.qualifications.map((q, i) => (
+                    <dd key={i} className="mt-1.5 text-[0.9375rem] leading-relaxed text-ink/80">
+                      {dr(q)}
+                    </dd>
+                  ))}
+                </div>
+              )}
+              {doctor.positions.length > 0 && (
+                <div>
+                  <dt className="font-display text-lg font-semibold text-brand-900">{t("hero.position")}</dt>
+                  {doctor.positions.map((q, i) => (
+                    <dd key={i} className="mt-1.5 text-[0.9375rem] leading-relaxed text-ink/80">
+                      {dr(q)}
+                    </dd>
+                  ))}
+                </div>
+              )}
+            </dl>
+
+            <div className="mt-10 flex flex-wrap gap-3">
               <Link href="/appointment" className="btn-primary">
                 {t("common.bookAnAppointment")}
               </Link>
-              <WhatsAppLink variant="outline" message={t("whatsapp.doctor", { doctor: doctor.name })} />
               <Link href="/doctor" className="btn-secondary">
                 {t("home.doctorProfile")}
               </Link>
@@ -226,98 +232,102 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* 6. What to expect */}
-      <section className="section bg-sage-50">
+      {/* What to expect */}
+      <section className="section">
         <div className="container-page">
-          <p className="eyebrow">{t("home.expectEyebrow")}</p>
-          <h2 className="section-title">{t("home.expectTitle")}</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <h2 className="section-title max-w-2xl">{t("home.expectTitle")}</h2>
+          <ul className="mt-14 grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {expect.map(({ icon: Icon, title, text }) => (
-              <div key={title} className="card">
-                <Icon className="h-8 w-8 text-brand-600" aria-hidden="true" />
-                <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed">{text}</p>
-              </div>
+              <li key={title} className="border-t-2 border-lagoon-500 pt-6">
+                <Icon className="h-6 w-6 text-lagoon-600" aria-hidden="true" strokeWidth={1.75} />
+                <h3 className="mt-5 text-[1.375rem] leading-snug font-semibold">{title}</h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/80">{text}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* 7. A look inside */}
-      <section className="section">
+      {/* Inside the clinic */}
+      <section className="overflow-hidden bg-brand-950 py-18 text-white sm:py-24">
         <div className="container-page">
-          <p className="eyebrow">{t("home.insideEyebrow")}</p>
-          <h2 className="section-title">{t("home.insideTitle")}</h2>
-          <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {gallery.slice(0, 4).map((g) => (
-              <li key={g.id}>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-xl">
+              <h2 className="section-title text-white">{t("home.insideTitle")}</h2>
+              <p className="mt-4 text-lg leading-relaxed text-brand-200">{t("hero.insideText")}</p>
+            </div>
+            <Link href="/gallery" className="btn border border-white/30 text-white hover:border-white/60 hover:bg-white/5">
+              {t("common.viewGallery")}
+            </Link>
+          </div>
+          <ul className="mt-14 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+            {gallery.slice(0, 4).map((g, i) => (
+              <li key={g.id} className={i % 2 === 1 ? "lg:mt-16" : undefined}>
                 <figure>
-                  <div className="relative aspect-[9/16] overflow-hidden rounded-3xl bg-sage-100">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-frame)] bg-brand-900">
                     <Image src={g.image.path} alt={L(g.image.alt, locale, g.reviewStatus)} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
                   </div>
-                  <figcaption className="mt-2 text-center text-sm font-semibold">{L(g.caption, locale, g.reviewStatus)}</figcaption>
+                  <figcaption className="mt-3 text-[0.9375rem] text-brand-200">{L(g.caption, locale, g.reviewStatus)}</figcaption>
                 </figure>
               </li>
             ))}
           </ul>
-          <div className="mt-8 text-center">
-            <Link href="/gallery" className="btn-secondary">
-              {t("common.viewGallery")}
+        </div>
+      </section>
+
+      {/* How booking works: a real sequence, so numbered */}
+      <section className="section">
+        <div className="container-page">
+          <h2 className="section-title">{t("home.bookingEyebrow")}</h2>
+          <ol className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+            <span aria-hidden="true" className="absolute top-6 right-[16%] left-[16%] hidden h-px bg-sage-300 md:block" />
+            {[1, 2, 3].map((n) => (
+              <li key={n} className="relative md:text-center">
+                <span aria-hidden="true" className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-lagoon-500 bg-white font-display text-xl font-semibold text-brand-900 md:mx-auto">
+                  {n}
+                </span>
+                <h3 className="mt-5 text-[1.375rem] font-semibold">{t(`home.step${n}`)}</h3>
+                <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink/80 md:mx-auto md:max-w-xs">{t(`home.step${n}Text`)}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-14 flex flex-wrap gap-3 md:justify-center">
+            <Link href="/appointment" className="btn-primary">
+              <CalendarCheck className="h-[1.125rem] w-[1.125rem]" aria-hidden="true" />
+              {t("common.bookAnAppointment")}
             </Link>
+            <WhatsAppLink variant="outline" />
           </div>
         </div>
       </section>
 
-      {/* 8. How booking works */}
-      <section className="section bg-sage-50">
-        <div className="container-page">
-          <p className="eyebrow">{t("home.bookingEyebrow")}</p>
-          <h2 className="section-title">{t("home.bookingTitle")}</h2>
-          <ol className="mt-10 grid gap-6 md:grid-cols-3">
-            {[1, 2, 3].map((n) => (
-              <li key={n} className="card">
-                <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 font-bold text-white">
-                  {n}
-                </span>
-                <h3 className="mt-4 text-lg font-semibold">{t(`home.step${n}`)}</h3>
-                <p className="mt-2 text-sm leading-relaxed">{t(`home.step${n}Text`)}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* 9. Visit the clinic */}
-      <section className="section">
-        <div className="container-page grid gap-10 lg:grid-cols-2">
+      {/* Visit */}
+      <section className="section border-t border-sage-200 bg-sage-50">
+        <div className="container-page grid gap-12 lg:grid-cols-[2fr_3fr]">
           <div>
-            <p className="eyebrow">{t("home.visitEyebrow")}</p>
             <h2 className="section-title">{t("home.visitTitle")}</h2>
-            <ClinicAddress withName className="mt-6" />
-            <p className="mt-2 text-sm text-gray-600">{tr(clinic.landmarks)}</p>
-            <div className="mt-6">
+            <div className="mt-5">
+              <OpenStatus hours={hours} />
+            </div>
+            <ClinicAddress withName className="mt-6 text-[1.0625rem]" />
+            <p className="mt-3 text-[0.9375rem] text-sage-600">{tr(clinic.landmarks)}</p>
+            <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <OpeningHoursList />
-            </div>
-            <div className="mt-6">
               <ClinicPhoneNumbers />
-            </div>
-            <div className="mt-4">
-              <WhatsAppLink />
             </div>
           </div>
           <MapEmbed embedUrl={clinic.mapsEmbedUrl} />
         </div>
       </section>
 
-      {/* 10. FAQs */}
-      <section className="section bg-sage-50">
-        <div className="container-page max-w-4xl">
-          <p className="eyebrow">{t("home.faqEyebrow")}</p>
-          <h2 className="section-title">{t("home.faqTitle")}</h2>
-          <p className="mt-4">{t("home.faqText")}</p>
-          <div className="mt-8">
-            <FaqList faqs={faqItems} />
+      {/* FAQs */}
+      <section className="section">
+        <div className="container-page grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <div>
+            <h2 className="section-title">{t("home.faqTitle")}</h2>
+            <p className="lede mt-5">{t("home.faqText")}</p>
           </div>
+          <FaqList faqs={faqItems} />
         </div>
       </section>
       <JsonLd data={faqJsonLd(faqItems)} />

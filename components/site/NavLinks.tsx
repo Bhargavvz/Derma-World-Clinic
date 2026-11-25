@@ -16,9 +16,10 @@ export function NavLinks({ items, vertical = false, onNavigate }: { items: { hre
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex min-h-11 items-center rounded-full px-4 text-sm font-semibold transition-colors",
-                vertical && "text-base",
-                active ? "bg-brand-50 text-brand-800" : "text-gray-700 hover:bg-sage-50 hover:text-brand-700",
+                vertical
+                  ? "flex min-h-13 items-center border-b border-sage-100 font-display text-xl font-semibold"
+                  : "relative flex min-h-11 items-center px-3 text-[0.9375rem] font-medium whitespace-nowrap transition-colors after:absolute after:inset-x-3 after:bottom-1.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-lagoon-500 after:transition-transform after:duration-300 hover:after:scale-x-100",
+                active ? (vertical ? "text-lagoon-700" : "text-brand-900 after:scale-x-100") : vertical ? "text-brand-900" : "text-ink/75 hover:text-brand-900",
               )}
             >
               {it.label}

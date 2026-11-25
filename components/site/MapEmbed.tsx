@@ -10,21 +10,21 @@ export function MapEmbed({ embedUrl, children }: { embedUrl: string | null; chil
   const [shown, setShown] = useState(false);
   const t = useTranslations("map");
   return (
-    <div className="card overflow-hidden !p-0">
+    <div className="card flex flex-col overflow-hidden !p-0">
       {children && <div className="p-6">{children}</div>}
       {embedUrl && (
-        <div className="border-t border-sage-100">
+        <div className="flex flex-1 flex-col border-t border-sage-100">
           {shown ? (
             <iframe
               src={embedUrl}
               title={t("iframeTitle")}
-              className="aspect-[4/3] w-full sm:aspect-video"
+              className="aspect-[4/3] w-full flex-1 sm:aspect-video"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
           ) : (
-            <div className="flex aspect-[4/3] flex-col items-center justify-center gap-3 bg-sage-50 p-6 text-center sm:aspect-video">
+            <div className="flex aspect-[4/3] flex-1 flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_1px_1px,var(--color-sage-300)_1px,transparent_0)] bg-[size:18px_18px] bg-sage-50 p-6 text-center sm:aspect-video">
               <button
                 type="button"
                 className="btn-primary"
@@ -36,7 +36,7 @@ export function MapEmbed({ embedUrl, children }: { embedUrl: string | null; chil
                 <Map className="h-4 w-4" aria-hidden="true" />
                 {t("show")}
               </button>
-              <p className="max-w-xs text-sm text-gray-600">{t("note")}</p>
+              <p className="max-w-xs text-sm text-sage-600">{t("note")}</p>
             </div>
           )}
         </div>

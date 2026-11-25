@@ -42,7 +42,7 @@ export function LanguageSuggestion() {
         <a href={localePath(suggest, pathname)} hrefLang={htmlLang[suggest]} className="font-semibold text-brand-700 underline" onClick={dismiss}>
           {t("switch")}
         </a>
-        <button type="button" onClick={dismiss} className="text-gray-600 underline">
+        <button type="button" onClick={dismiss} className="text-sage-600 underline">
           {t("dismiss")}
         </button>
       </div>

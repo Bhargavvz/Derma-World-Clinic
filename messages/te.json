@@ -1,5 +1,8 @@
 {
-  "_meta": { "reviewStatus": "draft", "note": "Machine-drafted. Needs review by a qualified Telugu speaker before marking reviewed." },
+  "_meta": {
+    "reviewStatus": "draft",
+    "note": "Machine-drafted. Needs review by a qualified Telugu speaker before marking reviewed."
+  },
   "common": {
     "bookAppointment": "అపాయింట్‌మెంట్ బుక్ చేయండి",
     "bookAnAppointment": "అపాయింట్‌మెంట్ బుక్ చేయండి",
@@ -26,9 +29,23 @@
     "closeMenu": "మెనూ మూసివేయండి",
     "menu": "మెనూ"
   },
-  "footer": { "explore": "చూడండి", "treatments": "చికిత్సలు", "visitUs": "మమ్మల్ని సందర్శించండి", "privacy": "గోప్యతా విధానం", "cookieSettings": "కుకీ సెట్టింగ్‌లు" },
-  "consent": { "accept": "అనలిటిక్స్ అంగీకరించండి", "reject": "తిరస్కరించండి", "privacy": "గోప్యతా విధానం" },
-  "langSuggest": { "text": "ఈ వెబ్‌సైట్ {language} లో కూడా అందుబాటులో ఉంది.", "switch": "మార్చండి", "dismiss": "వద్దు" },
+  "footer": {
+    "explore": "చూడండి",
+    "treatments": "చికిత్సలు",
+    "visitUs": "మమ్మల్ని సందర్శించండి",
+    "privacy": "గోప్యతా విధానం",
+    "cookieSettings": "కుకీ సెట్టింగ్‌లు"
+  },
+  "consent": {
+    "accept": "అనలిటిక్స్ అంగీకరించండి",
+    "reject": "తిరస్కరించండి",
+    "privacy": "గోప్యతా విధానం"
+  },
+  "langSuggest": {
+    "text": "ఈ వెబ్‌సైట్ {language} లో కూడా అందుబాటులో ఉంది.",
+    "switch": "మార్చండి",
+    "dismiss": "వద్దు"
+  },
   "whatsapp": {
     "greeting": "నమస్తే Derma World Skin & Hair Clinic,",
     "bookIntro": "నేను అపాయింట్‌మెంట్ బుక్ చేయాలనుకుంటున్నాను.",
@@ -41,5 +58,24 @@
     "notes": "గమనికలు",
     "closing": "దయచేసి నా అపాయింట్‌మెంట్‌ను నిర్ధారించండి. ధన్యవాదాలు.",
     "contactIntro": "నమస్తే Derma World Skin & Hair Clinic, నేను {name}."
+  },
+  "status": {
+    "open": "ఇప్పుడు తెరిచి ఉంది, {time} వరకు",
+    "openAppt": "అపాయింట్‌మెంట్‌తో తెరిచి ఉంది, {time} వరకు",
+    "opensToday": "ఇప్పుడు మూసి ఉంది. ఈరోజు {time}కి తెరుస్తారు",
+    "opensTomorrow": "ఇప్పుడు మూసి ఉంది. రేపు {time}కి తెరుస్తారు",
+    "opensOn": "ఇప్పుడు మూసి ఉంది. {day} {time}కి తెరుస్తారు"
+  },
+  "hero": {
+    "cardTitle": "క్లినిక్‌కు రండి",
+    "doctorLine": "సంప్రదింపులు",
+    "directions": "దారి చూపించు",
+    "servicesTitle": "క్లినిక్‌లో అందించే చికిత్సలు",
+    "servicesText": "ప్రతి చికిత్స సంప్రదింపుతో మొదలవుతుంది. డాక్టర్ ఏమి పరిశీలిస్తారో చదవడానికి ఒక సమస్యను ఎంచుకోండి.",
+    "credentials": "అర్హతలు",
+    "position": "ప్రస్తుత హోదా",
+    "memberships": "సభ్యత్వాలు",
+    "insideText": "మౌలా అలీలో లూసిడ్ డయాగ్నోస్టిక్స్ పైన రిసెప్షన్, వెయిటింగ్ ఏరియా మరియు ప్రొసీజర్ గది.",
+    "ctaEyebrow": "మీకు అనుకూలమైనప్పుడు"
   }
 }

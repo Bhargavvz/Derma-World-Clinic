@@ -9,78 +9,75 @@ import { ClinicAddress, ClinicPhoneNumbers, DirectionsLinks, OpeningHoursList } 
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CookieSettingsLink } from "./ConsentBanner";
 
+const heading = "font-display text-lg font-semibold text-brand-900";
+
 export async function Footer() {
   const t = await getTranslations();
   const locale = (await getLocale()) as Locale;
   const treatments = await getTreatments();
   return (
-    <footer className="no-print bg-brand-900 text-brand-50">
-      <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-5">
-        <div className="lg:col-span-1">
-          <Image
-            src="/images/brand/logo-full.webp"
-            alt={t("common.logoAlt")}
-            width={402}
-            height={96}
-            className="h-auto w-56 rounded-xl bg-white p-2"
-          />
-          <p className="mt-4 text-sm leading-relaxed text-brand-100">{t("footer.tagline")}</p>
-          <div className="mt-5">
-            <ClinicPhoneNumbers inverted />
+    <footer className="no-print border-t border-sage-200 bg-sage-50 text-ink/85">
+      <div className="container-page grid gap-x-10 gap-y-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <Image src="/images/brand/logo-full.webp" alt={t("common.logoAlt")} width={402} height={96} className="h-auto w-60" />
+          <p className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed">{t("footer.tagline")}</p>
+          <div className="mt-6">
+            <ClinicPhoneNumbers />
           </div>
-          <Link href="/appointment" className="btn-light mt-5">
-            {t("common.bookAnAppointment")}
-          </Link>
         </div>
-        <div>
-          <h2 className="font-sans text-sm font-bold tracking-widest text-white uppercase">{t("footer.explore")}</h2>
-          <ul className="mt-4 space-y-1">
+
+        <nav aria-label={t("footer.explore")} className="lg:col-span-2">
+          <h2 className={heading}>{t("footer.explore")}</h2>
+          <ul className="mt-3">
             {navItems.map((n) => (
               <li key={n.href}>
-                <Link href={n.href} className="inline-flex min-h-11 items-center hover:text-white hover:underline">
+                <Link href={n.href} className="inline-flex min-h-10 items-center text-[0.9375rem] hover:text-lagoon-700">
                   {t(`nav.${n.key}`)}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/appointment" className="inline-flex min-h-10 items-center text-[0.9375rem] font-semibold text-lagoon-700 hover:text-lagoon-800">
+                {t("common.bookAnAppointment")}
+              </Link>
+            </li>
           </ul>
-        </div>
-        <div>
-          <h2 className="font-sans text-sm font-bold tracking-widest text-white uppercase">{t("footer.treatments")}</h2>
-          <ul className="mt-4 space-y-1 text-sm">
+        </nav>
+
+        <nav aria-label={t("footer.treatments")} className="lg:col-span-3">
+          <h2 className={heading}>{t("footer.treatments")}</h2>
+          <ul className="mt-3 text-[0.9375rem]">
             {treatments.map((tr) => (
               <li key={tr.slug}>
-                <Link href={`/treatments/${tr.slug}`} className="inline-flex min-h-9 items-center hover:text-white hover:underline">
+                <Link href={`/treatments/${tr.slug}`} className="inline-flex min-h-9 items-center hover:text-lagoon-700">
                   {L(tr.name, locale, tr.reviewStatus)}
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
-        <div>
-          <h2 className="font-sans text-sm font-bold tracking-widest text-white uppercase">{t("footer.visitUs")}</h2>
-          <ClinicAddress className="mt-4 text-sm text-brand-100" withName />
-          <div className="mt-4">
-            <DirectionsLinks inverted />
-          </div>
-        </div>
-        <div>
-          <h2 className="font-sans text-sm font-bold tracking-widest text-white uppercase">{t("common.openingHours")}</h2>
-          <div className="mt-4 text-sm">
-            <OpeningHoursList inverted />
+        </nav>
+
+        <div className="lg:col-span-3">
+          <h2 className={heading}>{t("footer.visitUs")}</h2>
+          <ClinicAddress className="mt-3 text-[0.9375rem]" />
+          <div className="mt-5 text-[0.9375rem]">
+            <OpeningHoursList />
           </div>
           <div className="mt-6">
-            <LanguageSwitcher inverted />
+            <DirectionsLinks />
           </div>
         </div>
       </div>
-      <div className="border-t border-brand-800">
-        <div className="container-page flex flex-col gap-3 py-6 text-xs leading-relaxed text-brand-100 sm:flex-row sm:items-start sm:justify-between">
+
+      <div className="border-t border-sage-200">
+        <div className="container-page flex flex-col gap-4 py-6 text-[0.8125rem] leading-relaxed text-sage-600 lg:flex-row lg:items-center lg:justify-between">
           <p className="max-w-3xl">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
-          <div className="flex shrink-0 gap-4">
-            <Link href="/privacy" className="underline hover:text-white">
+          <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2">
+            <Link href="/privacy" className="underline-offset-4 hover:text-brand-900 hover:underline">
               {t("footer.privacy")}
             </Link>
             <CookieSettingsLink label={t("footer.cookieSettings")} />
+            <LanguageSwitcher />
           </div>
         </div>
       </div>

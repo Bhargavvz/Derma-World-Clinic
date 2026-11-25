@@ -56,8 +56,7 @@ export default async function AboutPage({ params }: Props) {
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-md">
-            <div aria-hidden="true" className="absolute -inset-4 rotate-2 rounded-[2.5rem] bg-sage-200" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-xl">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-frame)]">
               <Image src={heroClinicImage.path} alt={L(heroClinicImage.alt, locale)} fill sizes="(min-width: 1024px) 448px, 90vw" className="object-cover" />
             </div>
           </div>
@@ -76,7 +75,7 @@ export default async function AboutPage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm text-gray-600">{t("about.servicesNote")}</p>
+          <p className="mt-6 text-sm text-sage-600">{t("about.servicesNote")}</p>
         </div>
       </section>
 
@@ -102,7 +101,7 @@ export default async function AboutPage({ params }: Props) {
               {gallery.slice(1, 5).map((g) => (
                 <li key={g.id}>
                   <figure>
-                    <div className="relative aspect-[9/16] overflow-hidden rounded-3xl bg-sage-100">
+                    <div className="relative aspect-[9/16] overflow-hidden rounded-[var(--radius-frame)] bg-sage-100">
                       <Image src={g.image.path} alt={L(g.image.alt, locale, g.reviewStatus)} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
                     </div>
                     <figcaption className="mt-2 text-center text-sm font-semibold">{L(g.caption, locale, g.reviewStatus)}</figcaption>
@@ -116,13 +115,13 @@ export default async function AboutPage({ params }: Props) {
           </div>
           <div className="card h-fit space-y-6">
             <div>
-              <h3 className="font-sans text-sm font-bold text-gray-900">{t("common.address")}</h3>
+              <h3 className="font-sans text-sm font-bold text-ink">{t("common.address")}</h3>
               <ClinicAddress withName className="mt-2 text-sm" />
             </div>
             <ClinicPhoneNumbers />
             <DirectionsLinks />
             <div>
-              <h3 className="mb-2 font-sans text-sm font-bold text-gray-900">{t("common.openingHours")}</h3>
+              <h3 className="mb-2 font-sans text-sm font-bold text-ink">{t("common.openingHours")}</h3>
               <OpeningHoursList />
             </div>
           </div>

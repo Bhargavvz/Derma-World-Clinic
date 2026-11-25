@@ -25,7 +25,7 @@ export function MobileMenu({ items, hours }: { items: { href: string; label: str
         <Dialog.Overlay className="fixed inset-0 z-50 bg-brand-950/40" />
         <Dialog.Content
           id="mobile-menu"
-          className="fixed inset-y-0 right-0 z-50 flex w-[86vw] max-w-sm flex-col gap-6 overflow-y-auto bg-white p-6 shadow-xl animate-fade-up"
+          className="fixed inset-y-0 right-0 z-50 flex w-[86vw] max-w-sm flex-col gap-6 overflow-y-auto bg-white p-6 shadow-xl animate-rise"
         >
           <div className="flex items-center justify-between">
             <Dialog.Title className="font-display text-xl text-brand-900">{t("nav.menu")}</Dialog.Title>
@@ -40,7 +40,7 @@ export function MobileMenu({ items, hours }: { items: { href: string; label: str
           <Link href="/appointment" className="btn-primary" onClick={() => setOpen(false)}>
             {t("common.bookAppointment")}
           </Link>
-          <p className="text-sm text-gray-600">{hours}</p>
+          <p className="text-sm text-sage-600">{hours}</p>
           <LanguageSwitcher />
         </Dialog.Content>
       </Dialog.Portal>

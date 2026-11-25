@@ -87,7 +87,7 @@ export function BookingForm({ groups, general, initialTreatment, whatsappNumber,
     time: tw("time"),
     notes: tw("notes"),
     closing: tw("closing"),
-    contactIntro: tw("contactIntro"),
+    contactIntro: tw.raw("contactIntro") as string,
     times: { Morning: t("times.Morning"), Afternoon: t("times.Afternoon"), Evening: t("times.Evening") },
   };
 
@@ -162,10 +162,10 @@ export function BookingForm({ groups, general, initialTreatment, whatsappNumber,
         <ol className="mt-6 space-y-3">
           {[t("successStep1"), t("successStep2"), t("successStep3")].map((s, i) => (
             <li key={i} className="flex gap-3">
-              <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">
+              <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-900 text-sm font-bold text-white">
                 {i + 1}
               </span>
-              <span className={i === 1 ? "font-semibold text-gray-900" : ""}>{s}</span>
+              <span className={i === 1 ? "font-semibold text-ink" : ""}>{s}</span>
             </li>
           ))}
         </ol>
@@ -185,11 +185,11 @@ export function BookingForm({ groups, general, initialTreatment, whatsappNumber,
             {t("editDetails")}
           </button>
         </div>
-        <h3 className="mt-8 font-sans text-sm font-bold tracking-wide text-gray-900 uppercase">{t("summary")}</h3>
-        <dl className="mt-3 divide-y divide-sage-100 rounded-2xl border border-sage-200">
+        <h3 className="mt-8 font-sans text-sm font-bold tracking-wide text-ink uppercase">{t("summary")}</h3>
+        <dl className="mt-3 divide-y divide-sage-100 rounded-[var(--radius-soft)] border border-sage-200">
           {done.summary.map(([k, v]) => (
             <div key={k} className="grid gap-1 p-3 sm:grid-cols-3">
-              <dt className="text-sm font-semibold text-gray-900">{k}</dt>
+              <dt className="text-sm font-semibold text-ink">{k}</dt>
               <dd className="text-sm whitespace-pre-wrap sm:col-span-2">{v}</dd>
             </div>
           ))}
@@ -197,7 +197,7 @@ export function BookingForm({ groups, general, initialTreatment, whatsappNumber,
         {firebaseConfigured && save !== "not_configured" && (
           <p
             role="status"
-            className={`mt-6 rounded-2xl p-4 text-sm ${
+            className={`mt-6 rounded-[var(--radius-soft)] p-4 text-sm ${
               save === "saved" ? "bg-brand-50 text-brand-800" : save === "saving" || save === "idle" ? "bg-sage-50" : "bg-amber-50 text-amber-800"
             }`}
           >
@@ -219,7 +219,7 @@ export function BookingForm({ groups, general, initialTreatment, whatsappNumber,
     <form ref={formRef} onSubmit={onSubmit} noValidate className="card relative space-y-5">
       <h2 className="text-2xl font-semibold">{t("formTitle")}</h2>
       {hasErrors && (
-        <p role="alert" className="rounded-2xl bg-red-50 p-3 text-sm font-medium text-red-700">
+        <p role="alert" className="rounded-[var(--radius-soft)] bg-red-50 p-3 text-sm font-medium text-red-700">
           {errors.form ? t(`errors.${errors.form}`) : t("errorSummary")}
         </p>
       )}
@@ -370,7 +370,7 @@ export function BookingForm({ groups, general, initialTreatment, whatsappNumber,
         <WhatsAppIcon />
         {t("submit")}
       </button>
-      <p className="text-sm text-gray-600">
+      <p className="text-sm text-sage-600">
         {t("privacy")}{" "}
         <Link href="/privacy" className="font-semibold text-brand-700 underline">
           {tf("privacy")}
