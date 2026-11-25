@@ -1,0 +1,23 @@
+{
+  "reception-and-pharmacy": [480, 900],
+  "clinic-entrance-signboard": [480, 720],
+  "waiting-area-seating": [480, 900],
+  "waiting-area-tv": [480, 900],
+  "procedure-room-door": [480, 900],
+  "doctor-cuticon-telangana": [480, 900],
+  "hero-reception": [560, 900],
+  "doctor": [380],
+  "treatment:acne-pimple-treatment": [480, 720, 960],
+  "treatment:acne-scar-treatment": [480, 720, 960],
+  "treatment:anti-ageing-fillers-botox": [480, 720, 960],
+  "treatment:fungal-infections": [480, 720, 960],
+  "treatment:hair-fall-prp-therapy": [480, 720, 960],
+  "treatment:laser-treatments": [480, 720, 960],
+  "treatment:nail-disorders": [480, 720, 960],
+  "treatment:pigmentation-chemical-peels": [480, 720, 960],
+  "treatment:skin-allergies": [480, 720, 960],
+  "treatment:warts-skin-tags": [480, 720, 960],
+  "logo-full": [402, 96],
+  "logo-hero": [1186, 272],
+  "logo-navbar": [733, 112]
+}
